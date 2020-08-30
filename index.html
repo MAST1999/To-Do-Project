@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>To Do List</title>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <nav id="leftNav">
+      <div class="container navSearch">
+        <label for="search">Search: </label>
+        <input type="text" name="search" id="searchInput" />
+      </div>
+      <div class="container navNew" onclick="makeNewNote()">
+        <p class="pNew">Make a new to do list</p>
+      </div>
+    </nav>
+
+    <!-- Main Section -->
+    <section id="mainSection">
+
+      <div class="mainContainer">
+          <div class="noteContainer" id="newNote">
+            <p class="title">
+                New <i class="fa fa-plus addNote" onclick="addTask()" attribute="0" 
+                aria-hidden="true"></i>
+            </p>
+            <p class="note">The first Task</p>
+            <i class="fa fa-pencil-square-o noteEdit" onclick="edit()"
+             attribute="0" title="Edit" aria-hidden="true"></i>
+            <input onclick="setLineThrough()" type="checkbox" name="done" class="cbDone">
+      </div>
+        <div class="noteContainer badBoy">
+            <p class="title">
+                Hello World 
+                <i class="fa fa-plus addNote" onclick="addTask()" attribute="0" 
+                 aria-hidden="true"></i>
+            </p>
+            <p class="note">This is the hello world note!</p>
+            <i class="fa fa-pencil-square-o noteEdit" onclick="edit()"
+             attribute="0" title="Edit" aria-hidden="true"></i>
+            <input onclick="setLineThrough()" type="checkbox" name="done" class="cbDone">
+      </div>
+    </section>
+    <script src="./javaScript.js"></script>
+    <script src="https://use.fontawesome.com/32f6a46d51.js"></script>
+  </body>
+</html>
