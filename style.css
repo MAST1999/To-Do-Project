@@ -47,6 +47,13 @@ body {
 #newNote {
     display: none;
 }
+.noteContainer:first-child {
+    display: none;
+}
+.cbDone::before {
+    content: " ";
+    display: inline;
+}
 /* ========================================= */
 /* Navigation / left panel */
 #leftNav {

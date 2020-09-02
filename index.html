@@ -32,6 +32,15 @@
              attribute="0" title="Edit" aria-hidden="true"></i>
             <input onclick="setLineThrough()" type="checkbox" name="done" class="cbDone">
       </div>
+        <div class="noteContainer">
+          <p class="title">
+              New <i class="fa fa-plus addNote" onclick="addTask()" 
+              aria-hidden="true"></i>
+          </p>
+          <p class="note rawParagraph">Task!</p>
+          <i class="fa fa-pencil-square-o noteEdit rawEdit" onclick="edit()" title="Edit" aria-hidden="true"></i>
+          <input onclick="setLineThrough()" type="checkbox" name="done" class="cbDone rawInput">
+        </div>
         <div class="noteContainer badBoy">
             <p class="title">
                 Hello World 
@@ -45,6 +54,18 @@
       </div>
     </section>
     <script src="./javaScript.js"></script>
+            <p class="note" attribute="0">This is the hello world note!</p>
+            <i class="fa fa-pencil-square-o noteEdit" onclick="edit()" attribute="0" title="Edit" aria-hidden="true"></i>
+            <input onclick="setLineThrough()" type="checkbox" name="done" class="cbDone">
+            <br>
+            <br>
+            <p class="note" attribute="1">This is the hello world note!</p>
+            <i class="fa fa-pencil-square-o noteEdit" onclick="edit()" attribute="1" title="Edit" aria-hidden="true"></i>
+            <input onclick="setLineThrough()" type="checkbox" name="done" class="cbDone">
+            <br class="break">
+      </div>
+    </section>
+    <script src="/javaScript.js"></script>
     <script src="https://use.fontawesome.com/32f6a46d51.js"></script>
   </body>
 </html>
