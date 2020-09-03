@@ -1,55 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>To Do List</title>
-</head>
-<body>
-  <!-- Wrapping all the web in the container -->
-  <div class="container wrapperAll">
-    <!-- Container for the navigation on the left -->
-    <div class="container navigation">
-      <nav class="navigation">
-        <!-- Search in the titles and it should be in the top bar -->
-        <div class="searchBar">
-          <div class="search">
-            <label for="searchInput">Search For Lists :</label>
-            <input type="text" name="SearchInput" id="inputSearch">
-          </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>To Do List</title>
+  </head>
+  <body>
+    <!-- Wrapping all the web in the container -->
+    <div class="container wrapperAll">
+      <!-- Search in the titles and it should be in the top bar -->
+      <div id="searchBar">
+        <div id="search">
+          <label for="searchInput">Search For Lists :</label>
+          <input type="text" name="SearchInput" id="inputSearch" />
+          <button id="btnFind">Find</button>
         </div>
+      </div>
+      <!-- Container for the navigation on the left -->
+      <nav id="navigation">
         <!-- Adding New Notes -->
-        <div class="addNotes">
-          <div class="addNoteButtonContainer">
+        <div id="addNotes">
+          <div id="addNoteButtonContainer">
             <button id="btnNewList">Add New To Do List !</button>
           </div>
         </div>
       </nav>
-    </div>
-    <!-- Container for the right container for the notes -->
-    <div class="container mainPanel">
-      <!-- Section for the Note Containers -->
-      <section class="noteContainers">
-        <!-- Div for the notes and functions inside of it -->
-        <div class="noteContainer mainDiv">
-          <!-- Title on the top of the notes -->
-          <div class="topFunctions">
-            <div class="titleContainer">
-              <p class="title">Hello World!</p>
+      <!-- Container for the right container for the notes -->
+      <div class="container mainPanel">
+        <!-- Section for the Note Containers -->
+        <section id="noteContainers">
+          <!-- Div for the notes and functions inside of it -->
+          <div class="noteContainer mainDiv">
+            <!-- Title on the top of the notes -->
+            <div class="topFunctions">
+              <div class="titleContainer">
+                <p class="title">Hello World!</p>
+              </div>
+              <label for="newTaskInput">New Task :</label>
+              <input
+                type="text"
+                name="newTaskInput"
+                class="inputNewTask"
+                placeholder="Task!"
+              />
+              <button class="btnAddClass">
+                Add Task <i class="fa fa-plus" aria-hidden="true"></i>
+              </button>
             </div>
-            <label for="newTaskInput">New Task :</label>
-            <input type="text" name="newTaskInput" id="inputNewTask" placeholder="Task!">
-            <button>Add Task <i class="fa fa-plus" aria-hidden="true"></i></button>
-          </div>
-          <!-- Tasks list in the note container -->
-          <div class="tasksDiv">
-            <div class="paragraphContainer">
-              <p class="note" id="1">Buy Vegetables!</p>
+            <!-- Tasks list in the note container -->
+            <div id="tasksDiv">
+              <div id="paragraphContainer">
+                <p id="note" id="0">
+                  Buy Vegetables!&nbsp;&nbsp;
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                  <i class="fa fa-trash-o" aria-hidden="true"></i>
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
-  </div>
-</body>
+    <script src="https://use.fontawesome.com/32f6a46d51.js"></script>
+  </body>
 </html>
