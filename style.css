@@ -3,12 +3,13 @@
     margin: 0px;
     box-sizing: border-box;
 }
-html {
-    height: 100%;
-}
 :root {
     /* border for the containers */
     --bfc: rgb(124, 124, 124) solid 2px;
+}
+html {
+    min-height: auto;
+    height: 100%;
 }
 /* Setting up the body's grid layout */
 body {
@@ -17,7 +18,7 @@ body {
 .wrapperAll {
     height: 100%;
     display: grid;
-    grid-template-rows: 100px minmax(350px, 1fr);
+    grid-template-rows: 100px 1fr;
     grid-template-columns: minmax(150px, 350px) minmax(400px, 1fr);
     grid-template-areas: 
     "search search"
@@ -69,6 +70,20 @@ button {
 input {
     height: 28px;
     padding: 3px;
+}
+/* making the first child of the make class invisible */
+.make:first-child{
+    display: none;
+}
+/* making the remove icon on title go left */
+.titleContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    justify-items: end;
+}
+.title {
+    justify-self: start;
 }
 /* note containers are set to be flex */
 #noteContainers {
