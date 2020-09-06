@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="style.css" />
     <title>To Do List</title>
   </head>
-  <body>
+  <body id="body">
     <!-- Wrapping all the web in the container -->
     <div class="container wrapperAll">
       <!-- Search in the titles and it should be in the top bar -->
@@ -46,16 +46,69 @@
                   ></i>
                 </button>
               </div>
-              <label for="newTaskInput">New Task :</label>
-              <input
-                type="text"
-                name="newTaskInput"
-                class="inputNewTask"
-                placeholder="Task!"
-              />
-              <button class="btnAddClass" onclick="addTask(event)">
-                Add Task <i class="fa fa-plus" aria-hidden="true"></i>
-              </button>
+              <div class="addCombo">
+                <label for="newTaskInput">New Task :</label>
+                <input
+                  type="text"
+                  name="newTaskInput"
+                  class="inputNewTask"
+                  placeholder="Task!"
+                />
+                <button class="btnAddClass" onclick="addTask(event)">
+                  Add Task
+                  <i
+                    onclick="addTask(event)"
+                    class="fa fa-plus"
+                    aria-hidden="true"
+                  ></i>
+                </button>
+              </div>
+            </div>
+            <!-- Tasks list in the note container -->
+            <div class="tasksDiv">
+              <div id="paragraphContainer">
+                <p id="defaultNote" class="note">
+                  Buy Vegetables!&nbsp;&nbsp;
+                  <button id="defaultEdit">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                  </button>
+                  <button id="defaultTrash">
+                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                  </button>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="noteContainer make">
+            <!-- Title on the top of the notes -->
+            <div class="topFunctions">
+              <div class="titleContainer">
+                <p class="title">Hello World!</p>
+                <button class="btnTrash" onclick="removeTheList(event)">
+                  <i
+                    onclick="removeTheList(event)"
+                    class="fa fa-trash-o"
+                    aria-hidden="true"
+                  ></i>
+                </button>
+              </div>
+              <div class="addCombo">
+                <label for="newTaskInput">New Task :</label>
+                <input
+                  type="text"
+                  name="newTaskInput"
+                  class="inputNewTask"
+                  placeholder="Task!"
+                />
+                <button class="btnAddClass" onclick="addTask(event)">
+                  Add Task
+                  <i
+                    onclick="addTask(event)"
+                    class="fa fa-plus"
+                    aria-hidden="true"
+                  ></i>
+                </button>
+              </div>
             </div>
             <!-- Tasks list in the note container -->
             <div class="tasksDiv">
@@ -85,60 +138,23 @@
                   ></i>
                 </button>
               </div>
-              <label for="newTaskInput">New Task :</label>
-              <input
-                type="text"
-                name="newTaskInput"
-                class="inputNewTask"
-                placeholder="Task!"
-              />
-              <button class="btnAddClass" onclick="addTask(event)">
-                Add Task <i class="fa fa-plus" aria-hidden="true"></i>
-              </button>
-            </div>
-            <!-- Tasks list in the note container -->
-            <div class="tasksDiv">
-              <div id="paragraphContainer">
-                <p class="note">
-                  Buy Vegetables!&nbsp;&nbsp;
-                  <button>
-                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                  </button>
-                  <button>
-                    <i class="fa fa-trash-o" aria-hidden="true"></i>
-                  </button>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="noteContainer make">
-            <!-- Title on the top of the notes -->
-            <div class="topFunctions">
-              <div class="titleContainer">
-                <p class="title">Hello World!</p>
-                <button class="btnTrash" onclick="removeTheList(event)">
+              <div class="addCombo">
+                <label for="newTaskInput">New Task :</label>
+                <input
+                  type="text"
+                  name="newTaskInput"
+                  class="inputNewTask"
+                  placeholder="Task!"
+                />
+                <button class="btnAddClass" onclick="addTask(event)">
+                  Add Task
                   <i
-                    onclick="removeTheList(event)"
-                    class="fa fa-trash-o"
+                    onclick="addTask(event)"
+                    class="fa fa-plus"
                     aria-hidden="true"
                   ></i>
                 </button>
               </div>
-              <label for="newTaskInput">New Task :</label>
-              <input
-                type="text"
-                name="newTaskInput"
-                class="inputNewTask"
-                placeholder="Task!"
-              />
-              <button class="btnAddClass" onclick="addTask(event)">
-                Add Task
-                <i
-                  onclick="addTask(event)"
-                  class="fa fa-plus"
-                  aria-hidden="true"
-                ></i>
-              </button>
             </div>
             <!-- Tasks list in the note container -->
             <div class="tasksDiv">
@@ -149,7 +165,7 @@
                 </button>
                 <button class="btnDelete">
                   <i class="fa fa-trash-o" aria-hidden="true"></i>
-                </button>
+                </button
               </p>
             </div>
           </div>

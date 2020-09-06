@@ -41,11 +41,51 @@ const addTask = (event) => {
     }
     const childrenOfNoteContainer = noteContainer.children;
     let tasksContainer = "";
+    // getting the tasksDiv in order to append a new task to it's child later on
     for (i = 0; i < childrenOfNoteContainer.length; i++) {
         if (childrenOfNoteContainer[i].getAttribute("class") === "tasksDiv") {
             tasksContainer = childrenOfNoteContainer[i];
+            console.log(tasksContainer);
             break;
         }
     }
-    // now append the text inside the input (if there is anything in it!)
+    // getting the note paragraph for appending
+    let paragraphContainer = tasksContainer.children[0];
+
+    selectedStandIn = selected;
+    let addCombo = selected;
+    // getting the addCombo class in order to access input value
+    for (i = 0; i < 2; i++) {
+        if (selectedStandIn.getAttribute("class") === "addCombo") {
+            addCombo = selectedStandIn;
+            break;
+        } else {
+            selectedStandIn = selectedStandIn.parentNode;
+        }
+    }
+    let inputNewText = addCombo.children[1].value;
+    console.log(inputNewText);
+    // checking for an empty input
+    if (inputNewText === "") {
+        alert("please write something before pressing add again!");
+        return;
+    }
+    // getting the defaultNote defaultEdit and defaultTrash for appending
+    const defaultNote = document.getElementById("defaultNote");
+    const defaultEdit = document.getElementById("defaultEdit");
+    const defaultTrash = document.getElementById("defaultTrash");
+    // now appending the input value to the paragraphContainer
+    paragraphContainer.appendChild(defaultNote.cloneNode(true));
+    paragraphContainer.lastChild.removeAttribute("id");
+    paragraphContainer.lastChild.textContent = inputNewText;
+    paragraphContainer.lastChild.innerHTML += "&nbsp;&nbsp;&nbsp;";
+
+    paragraphContainer.lastChild.appendChild(defaultEdit.cloneNode(true));
+    paragraphContainer.children[0].removeAttribute("id");
+    paragraphContainer.lastChild.innerHTML += "&nbsp;";
+
+    paragraphContainer.lastChild.appendChild(defaultTrash.cloneNode(true));
+    paragraphContainer.children[1].removeAttribute("id");
+    
+    console.log(paragraphContainer.lastChild);
 };
