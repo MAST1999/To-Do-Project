@@ -1,97 +1,102 @@
 * {
-    padding: 0px;
-    margin: 0px;
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
-:root {
-    /* border for the containers */
-    --bfc: rgb(124, 124, 124) solid 2px;
-}
-html {
-    min-height: auto;
-    height: 100%;
-}
-/* Setting up the body's grid layout */
+/* making the body the full size of the screen hight */
+html,
 body {
-    height: 100%;
+  height: 100%;
+  margin: 0;
 }
-.wrapperAll {
-    height: 100%;
-    display: grid;
-    grid-template-rows: 100px 1fr;
-    grid-template-columns: minmax(150px, 350px) minmax(400px, 1fr);
-    grid-template-areas: 
-    "search search"
-    "nav mainPanel";
+/* Root */
+:root {
+  /* Color for Input */
+  --cfi: #272727;
+  /* Color for Input Container Background */
+  --cficb: rgba(241, 243, 244, 0.24);
 }
-/* Setting up areas */
-#searchBar {
-    grid-area: search;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(190, 190, 190);
+/* making the main grid layout */
+#wrapperAll {
+  height: 100%;
+  padding: 10px 20px;
+  display: grid;
+  grid-template-columns: minmax(100px, 450px) minmax(350px, 1fr);
+  grid-template-rows: minmax(40px, 50px) minmax(400px, 1fr);
+  grid-template-areas:
+    "header header"
+    "navigation mainPanel";
+  background-color: #202124;
+  color: #e8eaed;
+}
+#header {
+  grid-area: header;
 }
 #navigation {
-    grid-area: nav;
-    justify-self: center;
-    padding-top: 15px;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    background-color: rgb(168, 168, 168);
+  grid-area: navigation;
 }
-.mainPanel {
-    grid-area: mainPanel;
-    padding: 15px;
-    background-color: rgb(105, 105, 105);
+#mainPanel {
+  grid-area: mainPanel;
 }
-/* Making the borders for the necessary elements and making adjustments */
-#search {
-    border: var(--bfc);
-    padding: 25px;
+/* Set the Header contents position */
+#header {
+  display: flex;
+  align-items: center;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  gap: 25%;
 }
-.noteContainer {
-    border: var(--bfc);
-    padding: 10px;
-}
-#btnNewList {
-    border: var(--bfc);
-    background-color: white;
-}
-button {
-    padding: 5px;
-    background-color: white;
-    border: var(--bfc);
+/* Setting up the inputs and containers */
+i {
+  color: var(--cfi);
 }
 input {
-    height: 28px;
-    padding: 3px;
+  background-color: transparent;
+  color: var(--cfi);
+  font-weight: 600;
+  border: none;
+  white-space: nowrap;
 }
-/* making the first child of the make class invisible */
-.make:first-child{
-    display: none;
+.inputContainer {
+  display: flex;
+  background-color: var(--cficb);
+  padding: 5px;
+  border-radius: 10px;
+  max-width: 500px;
+  min-width: 300px;
+  height: 40px;
+  gap: 8px;
+  align-items: center;
 }
-/* making the remove icon on title go left */
-.titleContainer {
+#searchBar {
+  flex: 0 1 600px;
+}
+#inputSearch {
+  flex: 1 1;
+}
+
+
+/* media queries for screens with 700px or less */
+@media only screen and (max-width: 600px) {
+  #wrapperAll {
+    grid-template-columns: minmax(50px, 150px) minmax(250px, 1fr);
+  }
+  #header {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
-    justify-items: end;
-}
-.title {
-    justify-self: start;
-}
-/* note containers are set to be flex */
-#noteContainers {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+  #tradeMark {
+    display: none;
+  }
+  #searchBar {
     display: flex;
-    gap: 5px;
-    flex-direction: row3;
-    flex-wrap: wrap;
+  }
+  .inputContainer {
+    max-width: 400px;
+  }
 }
-.noteContainer {
-    flex: 1 1 1120px;
+/* media queries for screens with at least 1100px of width */
+@media only screen and (min-width: 1100px) {
+.inputContainer {
+  max-width: 700px;
+}
 }

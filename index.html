@@ -6,173 +6,27 @@
     <link rel="stylesheet" href="style.css" />
     <title>To Do List</title>
   </head>
-  <body id="body">
-    <!-- Wrapping all the web in the container -->
-    <div class="container wrapperAll">
-      <!-- Search in the titles and it should be in the top bar -->
-      <div id="searchBar">
-        <div id="search">
-          <label for="searchInput">Search For Lists :</label>
-          <input type="text" name="SearchInput" id="inputSearch" />
-          <button id="btnFind">Find</button>
+  <body>
+    <div id="wrapperAll">
+      <div id="header" class="container">
+        <div id="tradeMark">
+          <p>MAST &trade;</p>
+        </div>
+        <div id="searchBar">
+          <div class="inputContainer">
+            <i class="fa fa-search" aria-hidden="true"></i>
+            <input
+              type="text"
+              name="search"
+              placeholder="Search"
+              id="inputSearch"
+            />
+          </div>
         </div>
       </div>
-      <!-- Container for the navigation on the left -->
-      <nav id="navigation">
-        <!-- Adding New Notes -->
-        <div id="addNotes">
-          <div id="addNoteButtonContainer">
-            <button id="btnNewList" onclick="addNewNote()">
-              Add New To Do List !
-            </button>
-          </div>
-        </div>
-      </nav>
-      <!-- Container for the right container for the notes -->
-      <div class="container mainPanel">
-        <!-- Section for the Note Containers -->
-        <section id="noteContainers">
-          <!-- Div for the notes and functions inside of it -->
-          <div class="noteContainer make">
-            <!-- Title on the top of the notes -->
-            <div class="topFunctions">
-              <div class="titleContainer">
-                <p class="title">Hello World!</p>
-                <button class="btnTrash" onclick="removeTheList(event)">
-                  <i
-                    onclick="removeTheList(event)"
-                    class="fa fa-trash-o"
-                    aria-hidden="true"
-                  ></i>
-                </button>
-              </div>
-              <div class="addCombo">
-                <label for="newTaskInput">New Task :</label>
-                <input
-                  type="text"
-                  name="newTaskInput"
-                  class="inputNewTask"
-                  placeholder="Task!"
-                />
-                <button class="btnAddClass" onclick="addTask(event)">
-                  Add Task
-                  <i
-                    onclick="addTask(event)"
-                    class="fa fa-plus"
-                    aria-hidden="true"
-                  ></i>
-                </button>
-              </div>
-            </div>
-            <!-- Tasks list in the note container -->
-            <div class="tasksDiv">
-              <div id="paragraphContainer">
-                <p id="defaultNote" class="note">
-                  Buy Vegetables!&nbsp;&nbsp;
-                  <button id="defaultEdit">
-                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                  </button>
-                  <button id="defaultTrash">
-                    <i class="fa fa-trash-o" aria-hidden="true"></i>
-                  </button>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="noteContainer make">
-            <!-- Title on the top of the notes -->
-            <div class="topFunctions">
-              <div class="titleContainer">
-                <p class="title">Hello World!</p>
-                <button class="btnTrash" onclick="removeTheList(event)">
-                  <i
-                    onclick="removeTheList(event)"
-                    class="fa fa-trash-o"
-                    aria-hidden="true"
-                  ></i>
-                </button>
-              </div>
-              <div class="addCombo">
-                <label for="newTaskInput">New Task :</label>
-                <input
-                  type="text"
-                  name="newTaskInput"
-                  class="inputNewTask"
-                  placeholder="Task!"
-                />
-                <button class="btnAddClass" onclick="addTask(event)">
-                  Add Task
-                  <i
-                    onclick="addTask(event)"
-                    class="fa fa-plus"
-                    aria-hidden="true"
-                  ></i>
-                </button>
-              </div>
-            </div>
-            <!-- Tasks list in the note container -->
-            <div class="tasksDiv">
-              <div id="paragraphContainer">
-                <p class="note">
-                  Buy Vegetables!&nbsp;&nbsp;
-                  <button>
-                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                  </button>
-                  <button>
-                    <i class="fa fa-trash-o" aria-hidden="true"></i>
-                  </button>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="noteContainer make">
-            <!-- Title on the top of the notes -->
-            <div class="topFunctions">
-              <div class="titleContainer">
-                <p class="title">Hello World!</p>
-                <button class="btnTrash" onclick="removeTheList(event)">
-                  <i
-                    onclick="removeTheList(event)"
-                    class="fa fa-trash-o"
-                    aria-hidden="true"
-                  ></i>
-                </button>
-              </div>
-              <div class="addCombo">
-                <label for="newTaskInput">New Task :</label>
-                <input
-                  type="text"
-                  name="newTaskInput"
-                  class="inputNewTask"
-                  placeholder="Task!"
-                />
-                <button class="btnAddClass" onclick="addTask(event)">
-                  Add Task
-                  <i
-                    onclick="addTask(event)"
-                    class="fa fa-plus"
-                    aria-hidden="true"
-                  ></i>
-                </button>
-              </div>
-            </div>
-            <!-- Tasks list in the note container -->
-            <div class="tasksDiv">
-              <p class="note">
-                Buy Vegetables!&nbsp;&nbsp;
-                <button class="btnEdit">
-                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                </button>
-                <button class="btnDelete">
-                  <i class="fa fa-trash-o" aria-hidden="true"></i>
-                </button
-              </p>
-            </div>
-          </div>
-        </section>
-      </div>
+      <div id="navigation" class="container"></div>
+      <div id="mainPanel" class="container"></div>
     </div>
     <script src="https://use.fontawesome.com/32f6a46d51.js"></script>
-    <script src="./javaScript.js"></script>
   </body>
 </html>
