@@ -10,7 +10,7 @@
     <div id="wrapperAll">
       <div id="header" class="container">
         <div id="tradeMark">
-          <p>MAST &trade;</p>
+          <p>MAST&trade;</p>
         </div>
         <div id="searchBar">
           <div class="inputContainer">
@@ -23,10 +23,72 @@
             />
           </div>
         </div>
+        <div id="addNowNoteList">
+          <button id="btnAddNewList" onclick="addNewList()">Add New Note List</button>
+        </div>
       </div>
-      <div id="navigation" class="container"></div>
-      <div id="mainPanel" class="container"></div>
+      <div id="navigation" class="container">
+        <div class="categories">
+          <div class="category">
+            <a href="./reminder.html">Reminder</a>
+          </div>
+          <div class="category">
+            <a href="./monthly.html">Monthly To Do</a>
+          </div>
+        </div>
+        <div class="addNewCategory">
+          <button id="btnNewCategory" onclick="addCategory(event)">&#43;</button>
+        </div>
+      </div>
+      <div id="mainPanel" class="container">
+        <div id="noteContainerMain">
+          <div class="noteContainer" style="display: none;">
+            <div class="titleContainer">
+              <p class="title" onkeypress="handleEnter(event)" onclick="edit(event)"></p>
+              <i class="fa fa-trash-o" onclick="removeList(event)" aria-hidden="true"></i>
+            </div>
+            <div class="paragraphNotes">
+              <div id="noteAndTool" class="noteAndTool">
+                <p class="note" onkeypress="handleEnter(event)" onclick="edit(event)"></p>
+                <i class="fa fa-trash-o" onclick="remove(event)" aria-hidden="true"></i>
+                <input type="checkbox" name="done" class="done" onclick="done(event)">
+              </div>
+            </div>
+            <div class="inputContainerMain">
+              <div class="inputContainer newTaskContainer">
+                <input type="text" name="newTask" class="newTask" />
+              </div>
+              <button class="btnAddTask" onclick="addNewTask(event)">Add Task &#43;</button>
+            </div>
+          </div>
+          <div class="noteContainer">
+            <div class="titleContainer">
+              <p class="title" onkeypress="handleEnter(event)" onclick="edit(event)">First</p>
+              <i class="fa fa-trash-o" onclick="removeList(event)" aria-hidden="true"></i>
+            </div>
+            <div class="paragraphNotes">
+              <div class="noteAndTool">
+                <p class="note" onkeypress="handleEnter(event)" onclick="edit(event)">Hello World</p>
+                <i class="fa fa-trash-o" onclick="remove(event)" aria-hidden="true"></i>
+                <input type="checkbox" name="done" class="done" onclick="done(event)">
+              </div>
+              <div class="noteAndTool">
+                <p class="note" onkeypress="handleEnter(event)" onclick="edit(event)">What am I doing? This is something</p>
+                <i class="fa fa-trash-o" onclick="remove(event)" aria-hidden="true"></i>
+                <input type="checkbox" name="done" class="done" onclick="done(event)">
+              </div>
+            </div>
+            <div class="inputContainerMain">
+              <div class="inputContainer newTaskContainer">
+                <input type="text" name="newTask" class="newTask" />
+              </div>
+              <button class="btnAddTask" onclick="addNewTask(event)">Add Task &#43;</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <script src="https://use.fontawesome.com/32f6a46d51.js"></script>
+    <script src="./javaScript.js"></script>
   </body>
 </html>
