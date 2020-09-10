@@ -4,22 +4,33 @@
 /* making the body the full size of the screen hight */
 html,
 body {
-  height: 100%;
   margin: 0;
+}
+html {
+  min-height: 100vh;
+  min-width: 100vw;
+}
+body {
+  min-height: 100vh;
+  min-width: 100vw;
 }
 /* Root */
 :root {
   /* Color for Input */
-  --cfi: #272727;
+  --cfi: #1a1a1a;
   /* Color for Input Container Background */
   --cficb: rgba(241, 243, 244, 0.24);
+  /* Color for Text with Dark Background */
+  --cftwdb: #949494;
 }
 /* making the main grid layout */
 #wrapperAll {
-  height: 100%;
+  overflow: hidden;
+  min-height: 100vh;
+  min-width: 100vw;
   padding: 10px 20px;
   display: grid;
-  grid-template-columns: minmax(100px, 450px) minmax(350px, 1fr);
+  grid-template-columns: minmax(100px, 200px) minmax(350px, 1fr);
   grid-template-rows: minmax(40px, 50px) minmax(400px, 1fr);
   grid-template-areas:
     "header header"
@@ -32,6 +43,7 @@ body {
 }
 #navigation {
   grid-area: navigation;
+  margin-top: 10px;
 }
 #mainPanel {
   grid-area: mainPanel;
@@ -41,8 +53,14 @@ body {
   display: flex;
   align-items: center;
   flex-flow: row nowrap;
-  justify-content: flex-start;
-  gap: 25%;
+  justify-content: space-between;
+}
+#btnAddNewList {
+  background-color: inherit;
+  color: var(--cftwdb);
+  border: 1px solid var(--cftwdb);
+  padding: 10px;
+  border-radius: 10px;
 }
 /* Setting up the inputs and containers */
 i {
@@ -72,12 +90,122 @@ input {
 #inputSearch {
   flex: 1 1;
 }
+#tradeMark {
+  color: var(--cftwdb);
+}
+/* navigation Settings */
+.categories {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+}
+#navigation {
+  color: var(--cftwdb);
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+#btnNewCategory {
+  margin-top: 16px;
+  background-color: inherit;
+  border: none;
+  font-size: 26px;
+  color: inherit;
+}
+.category a{
+  display: block;
+  margin: 16px 0px;
+  text-decoration: none;
+  color: var(--cftwdb);
+}
+/* Main Panel */
+#mainPanel {
+  padding: 5px;
+  height: 100%;
+}
+#noteContainerMain {
+  margin-top: 10px;
+  height: 100%;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.noteContainer {
+  padding: 5px;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+.btnAddTask {
+  background-color: inherit;
+  border: 1px solid var(--cftwdb);
+  color: var(--cftwdb);
+  margin-left: 5px;
+  border-radius: 10px;
+}
+.inputContainerMain {
+  display: flex;
+}
+.newTaskContainer {
+  flex: 1 1 200px;
 
-
+}
+.newTask {
+  width: 100%;
+}
+.fa-trash-o {
+  color: var(--cftwdb);
+  margin-left: 10px;
+}
+.noteAndTool {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+.titleContainer {
+  display: grid;
+  grid-template-columns: 1fr 15px;
+  align-items: center;
+  border-bottom: 1px solid var(--cftwdb)
+}
+.titleContainer .fa {
+  justify-self: end;
+  margin-left: 0px;
+}
+.paragraphNotes {
+  margin-top: 5px;
+}
+/* Setting up the checkboxes */
+.done {
+  appearance: none;
+  background-color: var(--cftwdb);
+	padding: 9px;
+	border-radius: 3px;
+	display: inline-block;
+	position: relative;
+}
+.done:active, .done:checked:active {
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+}
+.done:checked {
+  background-color: var(--cfi);
+	border: 1px solid #adb8c0;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
+	color: #99a1a7;
+}
+.done:checked:after {
+  content: '\2714';
+	font-size: 14px;
+	position: absolute;
+	top: 0px;
+	left: 3px;
+	color: #99a1a7;
+}
 /* media queries for screens with 700px or less */
 @media only screen and (max-width: 600px) {
   #wrapperAll {
-    grid-template-columns: minmax(50px, 150px) minmax(250px, 1fr);
+    grid-template-columns: 65px 1fr;
   }
   #header {
     display: grid;
@@ -90,13 +218,17 @@ input {
   #searchBar {
     display: flex;
   }
+  .noteContainer {
+    flex: 1 1;
+  }
   .inputContainer {
     max-width: 400px;
+    flex: 1 1;
   }
 }
 /* media queries for screens with at least 1100px of width */
 @media only screen and (min-width: 1100px) {
-.inputContainer {
-  max-width: 700px;
-}
+  .inputContainer {
+    max-width: 700px;
+  }
 }
