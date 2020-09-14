@@ -94,7 +94,7 @@ input {
   color: var(--cftwdb);
 }
 /* navigation Settings */
-.categories {
+#categories {
   display: flex;
   flex-flow: column wrap;
   justify-content: center;
@@ -113,11 +113,28 @@ input {
   font-size: 26px;
   color: inherit;
 }
+#btnRemoveCategory {
+  margin-top: 16px;
+  background-color: inherit;
+  border: none;
+  font-size: 26px;
+  color: inherit;
+}
 .category a{
   display: block;
   margin: 16px 0px;
   text-decoration: none;
   color: var(--cftwdb);
+}
+.addNewCategory {
+  margin-top: 16px;
+  display: flex;
+  flex-flow: column wrap;
+}
+#inputCategory {
+  background-color: var(--cftwdb);
+  border-radius: 5px;
+  height: 30px;
 }
 /* Main Panel */
 #mainPanel {
@@ -201,6 +218,10 @@ input {
 	top: 0px;
 	left: 3px;
 	color: #99a1a7;
+}
+/* Class for Search() */
+.search {
+  color: rgba(214, 214, 0, 0.95);
 }
 /* media queries for screens with 700px or less */
 @media only screen and (max-width: 600px) {

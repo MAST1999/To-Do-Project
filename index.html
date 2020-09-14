@@ -20,6 +20,7 @@
               name="search"
               placeholder="Search"
               id="inputSearch"
+              onkeyup="search()"
             />
           </div>
         </div>
@@ -28,7 +29,7 @@
         </div>
       </div>
       <div id="navigation" class="container">
-        <div class="categories">
+        <div id="categories">
           <div class="category">
             <a href="./reminder.html">Reminder</a>
           </div>
@@ -37,7 +38,9 @@
           </div>
         </div>
         <div class="addNewCategory">
-          <button id="btnNewCategory" onclick="addCategory(event)">&#43;</button>
+          <input type="text" name="newCategory" id="inputCategory">
+          <button id="btnNewCategory" onclick="addCategory()">&#43;</button>
+          <button id="btnRemoveCategory" onclick="removeCategory()">&minus;</button>
         </div>
       </div>
       <div id="mainPanel" class="container">
