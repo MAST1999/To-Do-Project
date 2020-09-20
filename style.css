@@ -1,7 +1,7 @@
 * {
   box-sizing: border-box;
 }
-/* making the body the full size of the screen hight */
+/* making the body the full size of the screen height */
 html,
 body {
   margin: 0;
@@ -120,7 +120,7 @@ input {
   font-size: 26px;
   color: inherit;
 }
-.category a{
+.category a {
   display: block;
   margin: 16px 0px;
   text-decoration: none;
@@ -166,7 +166,6 @@ input {
 }
 .newTaskContainer {
   flex: 1 1 200px;
-
 }
 .newTask {
   width: 100%;
@@ -184,7 +183,7 @@ input {
   display: grid;
   grid-template-columns: 1fr 15px;
   align-items: center;
-  border-bottom: 1px solid var(--cftwdb)
+  border-bottom: 1px solid var(--cftwdb);
 }
 .titleContainer .fa {
   justify-self: end;
@@ -197,27 +196,31 @@ input {
 .done {
   appearance: none;
   background-color: var(--cftwdb);
-	padding: 9px;
-	border-radius: 3px;
-	display: inline-block;
-	position: relative;
+  padding: 9px;
+  border-radius: 3px;
+  display: inline-block;
+  position: relative;
 }
-.done:active, .done:checked:active {
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+.done:active,
+.done:checked:active {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05),
+    inset 0px 1px 3px rgba(0, 0, 0, 0.1);
 }
 .done:checked {
   background-color: var(--cfi);
-	border: 1px solid #adb8c0;
-	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
-	color: #99a1a7;
+  border: 1px solid #adb8c0;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05),
+    inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05),
+    inset 15px 10px -12px rgba(255, 255, 255, 0.1);
+  color: #99a1a7;
 }
 .done:checked:after {
-  content: '\2714';
-	font-size: 14px;
-	position: absolute;
-	top: 0px;
-	left: 3px;
-	color: #99a1a7;
+  content: "\2714";
+  font-size: 14px;
+  position: absolute;
+  top: 0px;
+  left: 3px;
+  color: #99a1a7;
 }
 /* Class for Search() */
 .search {
@@ -226,11 +229,14 @@ input {
 /* media queries for screens with 700px or less */
 @media only screen and (max-width: 600px) {
   #wrapperAll {
+    padding: 2px 4px;
     grid-template-columns: 65px 1fr;
+    grid-template-rows: 100px minmax(300px, 1fr);
   }
   #header {
     display: grid;
     grid-template-columns: 1fr;
+    grid-template-rows: 43px 43px;
     justify-items: center;
   }
   #tradeMark {
@@ -246,10 +252,16 @@ input {
     max-width: 400px;
     flex: 1 1;
   }
+  #inputCategory {
+    width: 65px;
+  }
 }
 /* media queries for screens with at least 1100px of width */
 @media only screen and (min-width: 1100px) {
   .inputContainer {
     max-width: 700px;
+  }
+  #inputCategory {
+    width: 190px;
   }
 }

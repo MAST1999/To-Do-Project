@@ -1,3 +1,21 @@
+if (!String.prototype.splice) {
+    /**
+     * {JSDoc}
+     *
+     * The splice() method changes the content of a string by removing a range of
+     * characters and/or adding new characters.
+     *
+     * @this {String}
+     * @param {number} start Index at which to start changing the string.
+     * @param {number} delCount An integer indicating the number of old chars to remove.
+     * @param {string} newSubStr The String that is spliced in.
+     * @return {string} A new string with the spliced substring.
+     */
+    String.prototype.splice = function (start, delCount, newSubStr) {
+        return this.slice(0, start) + newSubStr + this.slice(start + Math.abs(delCount));
+    };
+}
+
 const done = (event) => {
     const selectedCheckbox = event.target;
     const trashElement = selectedCheckbox.previousElementSibling;
@@ -35,16 +53,17 @@ const addNewTask = (event) => {
     inputForNewTask.value = "";
 };
 const edit = (event) => {
-    selectedParagraph = event.target;
+    const selectedParagraph = event.target;
     event.preventDefault();
+    searchRemove();
     selectedParagraph.setAttribute("contenteditable", "true");
     selectedParagraph.focus();
 };
 const handleEnter = (event) => {
     const pressedKey = event.keyCode;
     const selectedParagraph = event.target;
-    if (pressedKey == 13) {
-        if (selectedParagraph.textContent == "") {
+    if (pressedKey === 13) {
+        if (selectedParagraph.textContent === "") {
             const parentNoteAndTool = selectedParagraph.parentNode;
             const parentParagraphNotes = parentNoteAndTool.parentNode;
             parentParagraphNotes.removeChild(parentNoteAndTool);
@@ -70,41 +89,98 @@ const addNewList = () => {
     note[note.length - 1].setAttribute("contenteditable", "true");
     note[note.length - 1].focus();
 };
-const search = () => {
-    const inputValue = document.getElementById("inputSearch").value;
-    const allTitles = document.getElementsByClassName("title");
-    console.log(allTitles);
-    const allTasks = document.getElementsByClassName("note");
-    const pattern = new RegExp('(\\w*' + inputValue + '\\w*)', 'gi');
-    if (inputValue == "" || inputValue == undefined || inputValue == undefined) {
-        for (let i = 0; i < allTitles.length; i++) {
-                allTitles[i].classList.remove("search");
+
+const searchEdit = (searchValue, paraNode, pattern) => {
+    const repetition = paraNode.textContent.match(pattern);
+    let tempPara = paraNode.textContent;
+    let objectOfRepetitionAndIndexes = {
+
+    };
+    for (let i = 0; i < repetition.length; i++) {
+        const Index = tempPara.search(repetition[i]);
+        objectOfRepetitionAndIndexes["word" + i]= {
+            word: repetition[i],
+            indexOfWord: Index
+        };
+        let replacement = "";
+        const L = repetition[i].length;
+        for (let j = L; j > 0; j--) {
+            replacement += "`";
         }
-        for (let i = 0; i < allTasks.length; i++) {
-                allTasks[i].classList.remove("search");
-        }
-        return;
+        tempPara = tempPara.replace(repetition[i], replacement);
     }
-    for (let i = 0; i < allTitles.length; i++) {
-        if (allTitles[i].textContent.match(pattern)) {
-            allTitles[i].classList.add("search");
+    searchTempRemove(objectOfRepetitionAndIndexes, paraNode);
+};
+
+
+
+const searchTempRemove = (objectOfRepetitionAndIndexes, paraNode) => {
+    const words = Object.keys(objectOfRepetitionAndIndexes);
+    let tempParaNodeParagraph = paraNode.innerHTML;
+    words.forEach(currentWord => {
+        const removeTarget = objectOfRepetitionAndIndexes[currentWord].word;
+        const regex = new RegExp("\\w*(" + removeTarget + ")\\w*.?" ,'g');
+        tempParaNodeParagraph = tempParaNodeParagraph.replace(regex, "");
+    });
+
+    searchAddBack(paraNode, tempParaNodeParagraph, objectOfRepetitionAndIndexes, words);
+};
+
+const searchAddBack = (paraNode, tempParaNodeParagraph, objectOfRepetitionAndIndexes, words) => {
+    tempParaNodeParagraph = "";
+    for (let i = 0; i < words.length; i++) {
+        const word = words[i];
+        const beforeWord = words[i - 1];
+        const currentWord = objectOfRepetitionAndIndexes[word].word;
+        const startingIndex = objectOfRepetitionAndIndexes[word].indexOfWord;
+        if (words.length === 1) {
+            tempParaNodeParagraph += paraNode.innerHTML.slice(0, startingIndex) + `<span class="search">${currentWord}</span>` + paraNode.innerHTML.slice(startingIndex + currentWord.length);
+            break;
         }
-        else {
-            allTitles[i].classList.remove("search");
+        else if (word === "word0") {
+            tempParaNodeParagraph += paraNode.innerHTML.slice(0, startingIndex) + `<span class="search">${currentWord}</span> `;
+        } else {
+            const preIndex = objectOfRepetitionAndIndexes[beforeWord].indexOfWord;
+            const preWordLength = objectOfRepetitionAndIndexes[beforeWord].word.length - 1;
+            tempParaNodeParagraph += paraNode.innerHTML.slice( preIndex + preWordLength + 2, startingIndex) + `<span class="search">${currentWord}</span> `;
         }
     }
-    for (let i = 0; i < allTasks.length; i++) {
-        if (allTasks[i].textContent.match(pattern)) {
-            allTasks[i].classList.add("search");
-        }
-        else {
-            allTasks[i].classList.remove("search");
+    if (paraNode.innerHTML.length !== tempParaNodeParagraph.length - words.length * 28 ) {
+        const lastWord = words[words.length - 1];
+        const index = objectOfRepetitionAndIndexes[lastWord].indexOfWord;
+        
+        const length1 = objectOfRepetitionAndIndexes[lastWord].word.length;
+        tempParaNodeParagraph += paraNode.innerHTML.slice(index + length1);
+    }
+    paraNode.innerHTML = tempParaNodeParagraph;
+};
+
+const searchRemove = () => {
+    const SearchClass = document.querySelectorAll(".search");
+    SearchClass.forEach(spans => {
+        const inside = spans.textContent;
+        const parent = spans.parentNode;
+        spans.insertAdjacentText("beforebegin", inside);
+        parent.removeChild(spans);
+    });
+};
+
+const alternativeSearch = (event) => {
+    if (event.keyCode === 13) {
+        const inputSearchValue = document.getElementById("inputSearch").value;
+        let allTheSearchTargets = document.querySelectorAll(".title, .note");
+        const pattern = new RegExp('(\\w*' + inputSearchValue + '\\w*)', 'gi');
+        searchRemove(allTheSearchTargets);
+        for (let i = 0; i < allTheSearchTargets.length; i++) {
+            if (allTheSearchTargets[i].textContent.match(pattern)) {
+                searchEdit(inputSearchValue, allTheSearchTargets[i], pattern);
+            }
         }
     }
 };
 const addCategory = () => {
     const categoryName = document.getElementById("inputCategory").value;
-    if (categoryName == "" || categoryName == undefined || categoryName == null) return;
+    if (categoryName === "" || categoryName === undefined) return;
     const div = document.createElement("div");
     div.classList.add("category");
     const a = document.createElement("a");
@@ -115,10 +191,10 @@ const addCategory = () => {
 };
 const removeCategory = () => {
     const categoryName = document.getElementById("inputCategory").value;
-    if (categoryName == "" || categoryName == undefined || categoryName == null) return;
+    if (categoryName === "" || categoryName === undefined) return;
     const allCategories = document.getElementsByClassName("category");
     const categoriesContainer = document.getElementById("categories");
     for (let i = 0; i < allCategories.length; i++) {
-        if (allCategories[i].children[0].textContent == categoryName) categoriesContainer.removeChild(allCategories[i]);
+        if (allCategories[i].children[0].textContent === categoryName) categoriesContainer.removeChild(allCategories[i]);
     }
 };
