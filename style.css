@@ -55,12 +55,16 @@ body {
   flex-flow: row nowrap;
   justify-content: space-between;
 }
-#btnAddNewList {
+#btnAddNewList,#btnShowDone,#btnActive,#btnAllTasks {
   background-color: inherit;
   color: var(--cftwdb);
   border: 1px solid var(--cftwdb);
   padding: 10px;
   border-radius: 10px;
+}
+.buttons {
+  display: flex;
+  gap: 5px;
 }
 /* Setting up the inputs and containers */
 i {

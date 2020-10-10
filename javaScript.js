@@ -72,7 +72,7 @@ const addNewList = () => {
     note[note.length - 1].focus();
 };
 
-const searchEdit = (searchValue, paraNode, pattern) => {
+const searchEdit = (paraNode, pattern) => {
     const repetition = paraNode.textContent.match(pattern);
     let tempPara = paraNode.textContent;
     let objectOfRepetitionAndIndexes = {
@@ -80,7 +80,7 @@ const searchEdit = (searchValue, paraNode, pattern) => {
     };
     for (let i = 0; i < repetition.length; i++) {
         const Index = tempPara.search(repetition[i]);
-        objectOfRepetitionAndIndexes["word" + i]= {
+        objectOfRepetitionAndIndexes["word" + i] = {
             word: repetition[i],
             indexOfWord: Index
         };
@@ -99,7 +99,7 @@ const searchTempRemove = (objectOfRepetitionAndIndexes, paraNode) => {
     let tempParaNodeParagraph = paraNode.innerHTML;
     words.forEach(currentWord => {
         const removeTarget = objectOfRepetitionAndIndexes[currentWord].word;
-        const regex = new RegExp("\\w*(" + removeTarget + ")\\w*.?" ,'g');
+        const regex = new RegExp("\\w*(" + removeTarget + ")\\w*.?", 'g');
         tempParaNodeParagraph = tempParaNodeParagraph.replace(regex, "");
     });
 
@@ -122,13 +122,13 @@ const searchAddBack = (paraNode, tempParaNodeParagraph, objectOfRepetitionAndInd
         } else {
             const preIndex = objectOfRepetitionAndIndexes[beforeWord].indexOfWord;
             const preWordLength = objectOfRepetitionAndIndexes[beforeWord].word.length - 1;
-            tempParaNodeParagraph += paraNode.innerHTML.slice( preIndex + preWordLength + 2, startingIndex) + `<span class="search">${currentWord}</span> `;
+            tempParaNodeParagraph += paraNode.innerHTML.slice(preIndex + preWordLength + 2, startingIndex) + `<span class="search">${currentWord}</span> `;
         }
     }
-    if (paraNode.innerHTML.length !== tempParaNodeParagraph.length - words.length * 28 ) {
+    if (paraNode.innerHTML.length !== tempParaNodeParagraph.length - words.length * 28) {
         const lastWord = words[words.length - 1];
         const index = objectOfRepetitionAndIndexes[lastWord].indexOfWord;
-        
+
         const length1 = objectOfRepetitionAndIndexes[lastWord].word.length;
         tempParaNodeParagraph += paraNode.innerHTML.slice(index + length1);
     }
@@ -153,7 +153,7 @@ const alternativeSearch = (event) => {
         searchRemove(allTheSearchTargets);
         for (let i = 0; i < allTheSearchTargets.length; i++) {
             if (allTheSearchTargets[i].textContent.match(pattern)) {
-                searchEdit(inputSearchValue, allTheSearchTargets[i], pattern);
+                searchEdit(allTheSearchTargets[i], pattern);
             }
         }
     }
@@ -168,6 +168,7 @@ const addCategory = () => {
     a.textContent = categoryName;
     div.appendChild(a);
     document.getElementById("categories").appendChild(div);
+    document.getElementById("inputCategory").value = "";
 };
 const removeCategory = () => {
     const categoryName = document.getElementById("inputCategory").value;
@@ -177,4 +178,35 @@ const removeCategory = () => {
     for (let i = 0; i < allCategories.length; i++) {
         if (allCategories[i].children[0].textContent === categoryName) categoriesContainer.removeChild(allCategories[i]);
     }
+};
+const showCompleted = _ => {
+    const allCheckboxes = document.querySelectorAll(".done");
+    allCheckboxes.forEach(function checkIfDone(checkbox) {
+        if (!checkbox.checked) {
+            const parentDiv = checkbox.parentNode;
+            parentDiv.style.display = "none";
+        } else {
+            const parentDiv = checkbox.parentNode;
+            parentDiv.style.display = "flex";
+        }
+    });
+};
+const showActive = _ => {
+    const allCheckboxes = document.querySelectorAll(".done");
+    allCheckboxes.forEach(function checkIfDone(checkbox) {
+        if (!checkbox.checked) {
+            const parentDiv = checkbox.parentNode;
+            parentDiv.style.display = "flex";
+        } else {
+            const parentDiv = checkbox.parentNode;
+            parentDiv.style.display = "none";
+        }
+    });
+};
+const showAllTasks = _ => {
+    const allCheckboxes = document.querySelectorAll(".done");
+    allCheckboxes.forEach(function checkIfDone(checkbox) {
+        const parentDiv = checkbox.parentNode;
+        parentDiv.style.display = "flex";
+    });
 };
