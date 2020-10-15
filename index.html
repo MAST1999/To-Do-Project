@@ -27,18 +27,16 @@
         </div>
         <div class="buttons">
           <div id="addNowNoteList">
-            <button id="btnAddNewList" onclick="addNewList()">
-              Add New Note List
-            </button>
+            <button id="btnAddNewList">Add New Note List</button>
           </div>
           <div id="showDone">
-            <button id="btnShowDone" onclick="showCompleted()">Completed</button>
+            <button id="btnShowDone">Completed</button>
           </div>
           <div id="active">
-            <button id="btnActive" onclick="showActive()">Active</button>
+            <button id="btnActive">Active</button>
           </div>
           <div id="allTasks">
-            <button id="btnAllTasks" onclick="showAllTasks()">All Tasks</button>
+            <button id="btnAllTasks">All Tasks</button>
           </div>
         </div>
       </div>
@@ -53,36 +51,22 @@
         </div>
         <div class="addNewCategory">
           <input type="text" name="newCategory" id="inputCategory" />
-          <button id="btnNewCategory" onclick="addCategory()">&#43;</button>
-          <button id="btnRemoveCategory" onclick="removeCategory()">
-            &minus;
-          </button>
+          <button id="btnNewCategory">&#43;</button>
+          <button id="btnRemoveCategory">&minus;</button>
         </div>
       </div>
       <div id="mainPanel" class="container">
         <div id="noteContainerMain">
           <div class="noteContainer" style="display: none">
             <div class="titleContainer">
-              <p
-                class="title"
-                onkeypress="handleEnter(event)"
-                onclick="edit(event)"
-              ></p>
-              <i
-                class="fa fa-trash-o"
-                onclick="removeList(event)"
-                aria-hidden="true"
-              ></i>
+              <p class="title"></p>
+              <i class="fa fa-trash-o titleTrash" aria-hidden="true"></i>
             </div>
             <div class="paragraphNotes">
               <div id="noteAndTool" class="noteAndTool">
-                <p
-                  class="note"
-                  onkeypress="handleEnter(event)"
-                  onclick="edit(event)"
-                ></p>
+                <p class="note"></p>
                 <i
-                  class="fa fa-trash-o"
+                  class="fa fa-trash-o paragraphTrash"
                   onclick="remove(event)"
                   aria-hidden="true"
                 ></i>
@@ -173,6 +157,7 @@
       </div>
     </div>
     <script src="https://use.fontawesome.com/32f6a46d51.js"></script>
-    <script src="./javaScript.js"></script>
+    <script src="./control.js"></script>
+    <script src="./model.js"></script>
   </body>
 </html>
