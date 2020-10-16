@@ -5,6 +5,7 @@ const attachingEventHandlers = _ => {
     document.getElementById("btnAllTasks").addEventListener("click", showAllTasks);
     document.getElementById("btnNewCategory").addEventListener("click", addNewCategory);
     document.getElementById("btnRemoveCategory").addEventListener("click", removeCategory);
+    document.getElementById("inputSearch").addEventListener("keyup", search);
     const allTitlesAndNotes = document.querySelectorAll(".title .note");
     allTitlesAndNotes.forEach(function setEventForTitlesAndNotes(title) {
         title.addEventListener("click", edit);
@@ -16,6 +17,14 @@ const attachingEventHandlers = _ => {
     });
     const allParagraphRemoves = document.querySelectorAll("paragraphTrash");
     allParagraphRemoves.forEach(function setRemoveForIcons(paragraph) {
-        paragraph.addEventListener("click", removeList);
+        paragraph.addEventListener("click", removeParagraph);
+    });
+    const allDoneInputs = document.querySelectorAll("done");
+    allDoneInputs.forEach(function setRemoveForIcons(input) {
+        input.addEventListener("click", done);
+    });
+    const btnAddTask = document.querySelectorAll("btnAddTask");
+    btnAddTask.forEach(function setRemoveForIcons(task) {
+        task.addEventListener("click", addNewTask);
     });
 };

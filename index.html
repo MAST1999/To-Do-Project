@@ -21,7 +21,6 @@
               name="search"
               placeholder="Search"
               id="inputSearch"
-              onkeyup="alternativeSearch(event)"
             />
           </div>
         </div>
@@ -65,92 +64,39 @@
             <div class="paragraphNotes">
               <div id="noteAndTool" class="noteAndTool">
                 <p class="note"></p>
-                <i
-                  class="fa fa-trash-o paragraphTrash"
-                  onclick="remove(event)"
-                  aria-hidden="true"
-                ></i>
-                <input
-                  type="checkbox"
-                  name="done"
-                  class="done"
-                  onclick="done(event)"
-                />
+                <i class="fa fa-trash-o paragraphTrash" aria-hidden="true"></i>
+                <input type="checkbox" name="done" class="done" />
               </div>
             </div>
             <div class="inputContainerMain">
               <div class="inputContainer newTaskContainer">
                 <input type="text" name="newTask" class="newTask" />
               </div>
-              <button class="btnAddTask" onclick="addNewTask(event)">
-                Add Task &#43;
-              </button>
+              <button class="btnAddTask">Add Task &#43;</button>
             </div>
           </div>
           <div class="noteContainer">
             <div class="titleContainer">
-              <p
-                class="title"
-                onkeypress="handleEnter(event)"
-                onclick="edit(event)"
-              >
-                First
-              </p>
-              <i
-                class="fa fa-trash-o"
-                onclick="removeList(event)"
-                aria-hidden="true"
-              ></i>
+              <p class="title">First</p>
+              <i class="fa fa-trash-o" aria-hidden="true"></i>
             </div>
             <div class="paragraphNotes">
               <div class="noteAndTool">
-                <p
-                  class="note"
-                  onkeypress="handleEnter(event)"
-                  onclick="edit(event)"
-                >
-                  Hello World
-                </p>
-                <i
-                  class="fa fa-trash-o"
-                  onclick="remove(event)"
-                  aria-hidden="true"
-                ></i>
-                <input
-                  type="checkbox"
-                  name="done"
-                  class="done"
-                  onclick="done(event)"
-                />
+                <p class="note">Hello World</p>
+                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                <input type="checkbox" name="done" class="done" />
               </div>
               <div class="noteAndTool">
-                <p
-                  class="note"
-                  onkeypress="handleEnter(event)"
-                  onclick="edit(event)"
-                >
-                  What am I doing ? This is something
-                </p>
-                <i
-                  class="fa fa-trash-o"
-                  onclick="remove(event)"
-                  aria-hidden="true"
-                ></i>
-                <input
-                  type="checkbox"
-                  name="done"
-                  class="done"
-                  onclick="done(event)"
-                />
+                <p class="note">What am I doing ? This is something</p>
+                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                <input type="checkbox" name="done" class="done" />
               </div>
             </div>
             <div class="inputContainerMain">
               <div class="inputContainer newTaskContainer">
                 <input type="text" name="newTask" class="newTask" />
               </div>
-              <button class="btnAddTask" onclick="addNewTask(event)">
-                Add Task &#43;
-              </button>
+              <button class="btnAddTask">Add Task &#43;</button>
             </div>
           </div>
         </div>
