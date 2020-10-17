@@ -1,3 +1,8 @@
+const addNewList = _ => {
+    document.getElementById("noteContainerMain").append(document.querySelector(".noteContainer"));
+    
+};
+// ================================================================================
 const attachingEventHandlers = _ => {
     document.getElementById("btnAddNewList").addEventListener("click", addNewList);
     document.getElementById("btnShowDone").addEventListener("click", showDone);
