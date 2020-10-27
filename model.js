@@ -4,4 +4,11 @@ let list = {
 };
 let categories = [];
 let listArray = [];
-listArray.push(abs);
+
+class Model {
+    constructor () {
+        this.toDos = [
+            
+        ];
+    }
+}

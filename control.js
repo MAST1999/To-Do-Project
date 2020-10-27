@@ -1,3 +1,12 @@
+import { listArray } from "./model";
+import { list } from "./model";
+import { categories } from "./model";
+const displayConstructor = _ => {
+    const currentLists = document.querySelectorAll(".noteContainer");
+    if (currentLists.length - 1 === listArray.length) return; //currentLists has a -1 because it has the default list
+    console.log("hello");
+};
+displayConstructor();
 const addNewList = _ => {
     document.getElementById("noteContainerMain").append(document.querySelector(".noteContainer"));
     
@@ -33,3 +42,8 @@ const attachingEventHandlers = _ => {
         task.addEventListener("click", addNewTask);
     });
 };
+let tutorial = list;
+tutorial.title = "Tutorial";
+tutorial.tasks.push("You can Edit by clicking or pressing on the target Text");
+tutorial.tasks.push("Add new tasks after entering them in the section down here and pressing the Add New Task");
+listArray.push(tutorial);

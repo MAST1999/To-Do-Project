@@ -10,73 +10,10 @@
   <body>
     <div id="wrapperAll">
       <div id="header" class="container">
-        <div id="tradeMark">
-          <p>MAST&trade;</p>
-        </div>
-        <div id="searchBar">
-          <div class="inputContainer">
-            <i class="fa fa-search" aria-hidden="true"></i>
-            <input
-              type="text"
-              name="search"
-              placeholder="Search"
-              id="inputSearch"
-            />
-          </div>
-        </div>
-        <div class="buttons">
-          <div id="addNowNoteList">
-            <button id="btnAddNewList">Add New Note List</button>
-          </div>
-          <div id="showDone">
-            <button id="btnShowDone">Completed</button>
-          </div>
-          <div id="active">
-            <button id="btnActive">Active</button>
-          </div>
-          <div id="allTasks">
-            <button id="btnAllTasks">All Tasks</button>
-          </div>
-        </div>
       </div>
-      <div id="navigation" class="container">
-        <div id="categories">
-          <div class="category" style="display: none">
-            <a></a>
-          </div>
-        </div>
-        <div class="addNewCategory">
-          <input type="text" name="newCategory" id="inputCategory" />
-          <button id="btnNewCategory">&#43;</button>
-          <button id="btnRemoveCategory">&minus;</button>
-        </div>
-      </div>
-      <div id="mainPanel" class="container">
-        <div id="noteContainerMain">
-          <div class="noteContainer" style="display: none">
-            <div class="titleContainer">
-              <p class="title"></p>
-              <i class="fa fa-trash-o titleTrash" aria-hidden="true"></i>
-            </div>
-            <div class="paragraphNotes">
-              <div class="noteAndTool">
-                <p class="note"></p>
-                <i class="fa fa-trash-o paragraphTrash" aria-hidden="true"></i>
-                <input type="checkbox" name="done" class="done" />
-              </div>
-            </div>
-            <div class="inputContainerMain">
-              <div class="inputContainer newTaskContainer">
-                <input type="text" name="newTask" class="newTask" />
-              </div>
-              <button class="btnAddTask">Add Task &#43;</button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div id="mainPanel" class="container"></div>
     </div>
     <script src="https://use.fontawesome.com/32f6a46d51.js"></script>
-    <script src="./control.js"></script>
-    <script src="./model.js"></script>
+    <script src="./jsMVC.js"></script>
   </body>
 </html>

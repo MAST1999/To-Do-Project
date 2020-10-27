@@ -6,14 +6,7 @@ html,
 body {
   margin: 0;
 }
-html {
-  min-height: 100vh;
-  min-width: 100vw;
-}
-body {
-  min-height: 100vh;
-  min-width: 100vw;
-}
+
 /* Root */
 :root {
   /* Color for Input */
@@ -34,7 +27,7 @@ body {
   grid-template-rows: minmax(40px, 50px) minmax(400px, 1fr);
   grid-template-areas:
     "header header"
-    "navigation mainPanel";
+    "mainPanel mainPanel";
   background-color: #202124;
   color: #e8eaed;
 }
@@ -55,7 +48,7 @@ body {
   flex-flow: row nowrap;
   justify-content: space-between;
 }
-#btnAddNewList,#btnShowDone,#btnActive,#btnAllTasks {
+#btnAddNewList,#btnShowDone,#btnActive,#btnAllTasks,.btnSubmit {
   background-color: inherit;
   color: var(--cftwdb);
   border: 1px solid var(--cftwdb);
@@ -141,7 +134,7 @@ input {
   height: 30px;
 }
 /* Main Panel */
-#mainPanel {
+/* #mainPanel {
   padding: 5px;
   height: 100%;
 }
@@ -177,6 +170,23 @@ input {
 .cbDone::before {
     content: " ";
     display: inline;
+} */
+
+.newTaskInput {
+  background-color: var(--cftwdb);
+  padding: 5px;
+}
+.newTaskContainer {
+  display: flex;
+  gap: 5px;
+}
+.mainTitle {
+  color: var(--cftwdb);
+  text-align: center;
+  border-bottom: 1px solid var(--cftwdb);
+  margin-left: 10%;
+  margin-right: 10%;
+  padding-bottom: 15px;
 }
 /* ========================================= */
 /* Navigation / left panel */
