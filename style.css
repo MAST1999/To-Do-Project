@@ -48,7 +48,11 @@ body {
   flex-flow: row nowrap;
   justify-content: space-between;
 }
-#btnAddNewList,#btnShowDone,#btnActive,#btnAllTasks,.btnSubmit {
+#btnAddNewList,
+#btnShowDone,
+#btnActive,
+#btnAllTasks,
+.btnSubmit {
   background-color: inherit;
   color: var(--cftwdb);
   border: 1px solid var(--cftwdb);
@@ -173,7 +177,8 @@ input {
 } */
 
 .newTaskInput {
-  background-color: var(--cftwdb);
+  background-color: var(--cficb);
+  border-radius: 5px;
   padding: 5px;
 }
 .newTaskContainer {
@@ -191,8 +196,8 @@ input {
 /* ========================================= */
 /* Navigation / left panel */
 #leftNav {
-    padding: 10px;
-    background-color: rgb(100, 100, 100);
+  padding: 10px;
+  background-color: rgb(100, 100, 100);
 }
 .newTask {
   width: 100%;
