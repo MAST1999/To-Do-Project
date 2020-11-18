@@ -68,6 +68,7 @@ class Model {
     }
 
     editListTitle(ListTitle, newTitle) {
+        console.log(ListTitle, newTitle);
         const tempToDo = this.findList(ListTitle);
         this.lists.delete(ListTitle);
         this.lists.set(newTitle, tempToDo);
@@ -278,7 +279,28 @@ class View {
     }
 
     bindEditListTitle(handler) {
+        this.mainBody.addEventListener("click", event => {
+            event.preventDefault()
 
+            if (event.target.className === "listTitle") {
+                const newTitle = prompt("Enter new title : ")
+                const tempTemplate = event.target.parentNode
+                handler(tempTemplate.parentNode.id, newTitle)
+            }
+        })
+    }
+
+    bindDeleteList(handler) {
+        this.mainBody.addEventListener("click", event => {
+            event.preventDefault()
+
+            if (event.target.className === "button removeList") {
+                const parent = event.target.parentNode
+                const listId = parent.parentNode.id
+
+                handler(listId)
+            }
+        })
     }
 }
 
@@ -306,7 +328,8 @@ class Controller {
         this.view.bindToggleToDo(this.handleToggleTodo);
         this.view.bindAddList(this.handleAddList)
         this.view.bindEditToDo(this.handleEditTodo)
-        this.view.bindEditListTitle(handleEditListTitle)
+        this.view.bindEditListTitle(this.handleEditListTitle)
+        this.view.bindDeleteList(this.handleDeleteList)
     }
 
     onTodoListChanged() {
@@ -337,7 +360,7 @@ class Controller {
         this.model.editToDo(ListId, ToDoId, todoText);
         this.onTodoListChanged();
     }
-    // ------------------------
+
     handleEditListTitle(ListTitle, ListId) {
         this.model.editListTitle(ListTitle, ListId);
         this.onTodoListChanged();
@@ -347,9 +370,6 @@ class Controller {
         this.model.deleteList(ListId);
         this.onTodoListChanged();
     }
-
-
-
 }
 
 const application = new Controller(new Model(), new View());
