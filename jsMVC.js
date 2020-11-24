@@ -25,6 +25,7 @@ class Model {
 
     addToDo(ListTitle, ToDoText) {
         let ToDos = this.findList(ListTitle);
+        console.log(ToDos, ListTitle);
         const newToDo = {
             id: ToDos.length,
             text: ToDoText,
@@ -37,6 +38,7 @@ class Model {
         for (let title of this.lists.keys()) {
             if (title === ListTitle) {
                 alert("Title already in use!");
+                return;
             }
         }
         const todo = prompt("Enter the first To Do : ");
@@ -97,9 +99,10 @@ class View {
         this.header = this.createNewElement("div");
         this.header.id = "header";
         // Add new title part of the header
-        this.addTitleContainer = this.createNewElement("div")
+        this.addTitleContainer = this.createNewElement("div");
         this.addTitleContainer.id = "addTitleContainer"
-        this.btnAddList = this.createNewElement("button", "btnAddList");
+        this.btnAddList = this.createNewElement("button", "marginLeft");
+        this.btnAddList.id = "btnAddList";
         this.btnAddList.type = "button";
         this.btnAddList.textContent = "Add New List";
         this.inputListTitle = this.createNewElement("input")
@@ -121,21 +124,22 @@ class View {
 
         this.title = this.createNewElement("div", "listTitle");
 
-        this.deleteList = this.createNewElement("button", "button");
-        this.deleteList.classList.add("removeList");
-        this.deleteList.textContent = "Delete List";
+        this.deleteList = this.createNewElement("button", "removeList");
+        this.deleteList.textContent = "Remove List"
         // input part of the template
+        this.containerNewToDo = this.createNewElement("div", "newToDo");
         this.newInput = this.createNewElement("input", "newInput");
         this.newInput.type = "text";
 
-        this.btnAddToDo = this.createNewElement("button", "button");
+        this.btnAddToDo = this.createNewElement("button", "btnAddToDo");
+        this.btnAddToDo.classList.add("marginLeft")
         this.btnAddToDo.textContent = "Add";
-        this.btnAddToDo.classList.add("btnAddToDo");
+        this.containerNewToDo.append(this.newInput, this.btnAddToDo)
         // to do list
         this.listContainer = this.createNewElement("div", "listContainer");
         // assemble the list
         this.headContainer.append(this.title, this.deleteList);
-        this.templateContainer.append(this.headContainer, this.newInput, this.btnAddToDo, this.listContainer);
+        this.templateContainer.append(this.headContainer, this.containerNewToDo, this.listContainer);
         // append to the main body
         this.mainBody.append(this.templateContainer);
         //append everything to wrapper all
@@ -143,6 +147,7 @@ class View {
     }
 
     createNewElement(tag, className) {
+        console.log(className);
         const element = document.createElement(tag);
         if (className) {
             element.classList.add(className);
@@ -180,6 +185,7 @@ class View {
                     const btnDelete = this.createNewElement("button", "removeDo");
                     btnDelete.textContent = "Remove";
                     const btnEdit = this.createNewElement("button", "editDo");
+                    btnEdit.classList.add("noMarginLeft");
                     btnEdit.textContent = "Edit";
                     const inputCheckBox = this.createNewElement("input", "done");
                     inputCheckBox.type = "checkbox";
@@ -188,7 +194,7 @@ class View {
                         task.classList.add("completed")
                     }
                     doContainer.append(btnDelete, btnEdit, inputCheckBox, task);
-                    tempTemplate.children[3].append(doContainer);
+                    tempTemplate.children[2].append(doContainer);
                 });
                 this.mainBody.append(tempTemplate);
             }
@@ -205,8 +211,10 @@ class View {
             event.preventDefault();
 
             const clickedButton = event.target;
-            if (clickedButton.className === "button btnAddToDo") {
-                const template = clickedButton.parentNode;
+            console.log("here");
+            if (clickedButton.className === "btnAddToDo marginLeft") {
+                const addContainer = clickedButton.parentNode;
+                const template = addContainer.parentNode;
                 if (clickedButton.previousSibling.value) {
                     handler(template.id, clickedButton.previousSibling.value);
                 }
@@ -250,7 +258,7 @@ class View {
     }
 
     bindAddList(handler) {
-        const btnAddList = this.getSingleElement(".btnAddList")
+        const btnAddList = this.getSingleElement("#btnAddList")
 
         btnAddList.addEventListener("click", event => {
             if (this.inputListTitle.value) {
@@ -265,13 +273,12 @@ class View {
 
             const btnEdit = event.target
 
-            if (btnEdit.className === "editDo") {
+            if (btnEdit.className === "editDo noMarginLeft") {
                 const ToDo = btnEdit.parentNode
                 const todo = ToDo.lastChild
                 const ToDoId = parseFloat(ToDo.id)
                 const listContainer = ToDo.parentNode
                 const ListId = listContainer.parentNode.id
-                console.log(todo.textContent);
 
                 handler(ListId, ToDoId, todo.textContent)
             }
@@ -294,7 +301,7 @@ class View {
         this.mainBody.addEventListener("click", event => {
             event.preventDefault()
 
-            if (event.target.className === "button removeList") {
+            if (event.target.className === "removeList") {
                 const parent = event.target.parentNode
                 const listId = parent.parentNode.id
 

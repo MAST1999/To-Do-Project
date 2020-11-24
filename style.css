@@ -1,3 +1,72 @@
+/* resetting the general things and setting box-sizing */
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+/* this is for when the task is complete */
 .completed {
-    text-decoration: line-through red 2px;
+  text-decoration: line-through red 2px;
+}
+/* the main flex box containing the whole app */
+#wrapperAll {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+#header {
+  margin-top: 10px;
+  align-self: center;
+}
+/* fixing the margin from the screen / setting the mainBody as a flex box */
+#mainBody {
+  margin-left: 10px;
+  gap: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+/* styling buttons */
+[type="text"],
+button {
+  display: inline-block;
+  -webkit-appearance: none;
+  padding: 0.3rem 0.7rem;
+  font-size: 1rem;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  cursor: pointer;
+  background: #007bff;
+  color: white;
+  border: 2px solid #007bff;
+  margin: 4px 0.5rem;
+}
+.noMarginLeft {
+  margin-left: 0px;
+}
+
+.marginLeft {
+  margin-left: 4px;
+}
+/* styling inputs */
+[type="text"]:active,
+[type="text"]:focus {
+  outline: 0;
+  border: 2px solid #007bff;
+}
+.listTitle {
+  display: inline;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.doContainer {
+  margin-top: 4px;
+  border: 2px solid wheat;
+  border-radius: 4px;
+}
+.do {
+  padding: 0.4rem 0.7rem;
 }
