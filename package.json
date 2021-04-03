@@ -1,0 +1,13 @@
+{
+  "name": "to-do-project",
+  "version": "1.0.0",
+  "description": "A simple to do app",
+  "main": "index.html",
+  "repository": "https://github.com/MAST1999/To-Do-Project.git",
+  "author": "Muhammad Amin Saffari Taheri <ma.saffaritaheri@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "eslint": "^7.23.0"
+  }
+}
