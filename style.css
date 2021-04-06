@@ -1,284 +1,86 @@
+/* resetting the general things and setting box-sizing */
 * {
+  margin: 0px;
+  padding: 0px;
   box-sizing: border-box;
 }
-/* making the body the full size of the screen height */
-html,
-body {
-  margin: 0;
+/* this is for when the task is complete */
+.completed {
+  text-decoration: line-through red 2px;
 }
+body,
 html {
-  min-height: 100vh;
-  min-width: 100vw;
+  height: 100%;
 }
-body {
-  min-height: 100vh;
-  min-width: 100vw;
-}
-/* Root */
-:root {
-  /* Color for Input */
-  --cfi: #1a1a1a;
-  /* Color for Input Container Background */
-  --cficb: rgba(241, 243, 244, 0.24);
-  /* Color for Text with Dark Background */
-  --cftwdb: #949494;
-}
-/* making the main grid layout */
+/* the main flex box containing the whole app */
 #wrapperAll {
-  overflow: hidden;
-  min-height: 100vh;
-  min-width: 100vw;
-  padding: 10px 20px;
-  display: grid;
-  grid-template-columns: minmax(100px, 200px) minmax(350px, 1fr);
-  grid-template-rows: minmax(40px, 50px) minmax(400px, 1fr);
-  grid-template-areas:
-    "header header"
-    "navigation mainPanel";
-  background-color: #202124;
-  color: #e8eaed;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  gap: 20px;
 }
 #header {
-  grid-area: header;
-}
-#navigation {
-  grid-area: navigation;
   margin-top: 10px;
+  align-self: center;
 }
-#mainPanel {
-  grid-area: mainPanel;
-}
-/* Set the Header contents position */
-#header {
-  display: flex;
-  align-items: center;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-}
-#btnAddNewList,#btnShowDone,#btnActive,#btnAllTasks {
-  background-color: inherit;
-  color: var(--cftwdb);
-  border: 1px solid var(--cftwdb);
-  padding: 10px;
-  border-radius: 10px;
-}
-.buttons {
-  display: flex;
-  gap: 5px;
-}
-/* Setting up the inputs and containers */
-i {
-  color: var(--cfi);
-}
-input {
-  background-color: transparent;
-  color: var(--cfi);
-  font-weight: 600;
-  border: none;
-  white-space: nowrap;
-}
-.inputContainer {
-  display: flex;
-  background-color: var(--cficb);
-  padding: 5px;
-  border-radius: 10px;
-  max-width: 500px;
-  min-width: 300px;
-  height: 40px;
-  gap: 8px;
-  align-items: center;
-}
-#searchBar {
-  flex: 0 1 600px;
-}
-#inputSearch {
-  flex: 1 1;
-}
-#tradeMark {
-  color: var(--cftwdb);
-}
-/* navigation Settings */
-#categories {
-  display: flex;
-  flex-flow: column wrap;
-  justify-content: center;
-  align-items: center;
-}
-#navigation {
-  color: var(--cftwdb);
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-}
-#btnNewCategory {
-  margin-top: 16px;
-  background-color: inherit;
-  border: none;
-  font-size: 26px;
-  color: inherit;
-}
-#btnRemoveCategory {
-  margin-top: 16px;
-  background-color: inherit;
-  border: none;
-  font-size: 26px;
-  color: inherit;
-}
-.category a {
-  display: block;
-  margin: 16px 0px;
-  text-decoration: none;
-  color: var(--cftwdb);
-}
-.addNewCategory {
-  margin-top: 16px;
-  display: flex;
-  flex-flow: column wrap;
-}
-#inputCategory {
-  background-color: var(--cftwdb);
-  border-radius: 5px;
-  height: 30px;
-}
-/* Main Panel */
-#mainPanel {
-  padding: 5px;
-  height: 100%;
-}
-#noteContainerMain {
-  margin-top: 10px;
-  height: 100%;
-  display: flex;
+/* fixing the margin from the screen / setting the mainBody as a flex box */
+#mainBody {
+  margin-left: 10px;
   gap: 10px;
-  align-items: flex-start;
+  display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
 }
-.noteContainer {
-  padding: 5px;
-  border: 1px solid black;
-  border-radius: 10px;
+/* styling buttons */
+[type="text"],
+button {
+  display: inline-block;
+  -webkit-appearance: none;
+  padding: 0.3rem 0.7rem;
+  font-size: 1rem;
+  border: 2px solid #ccc;
+  border-radius: 4px;
 }
-.btnAddTask {
-  background-color: inherit;
-  border: 1px solid var(--cftwdb);
-  color: var(--cftwdb);
-  margin-left: 5px;
-  border-radius: 10px;
+
+button {
+  cursor: pointer;
+  background: #007bff;
+  color: white;
+  border: 2px solid #007bff;
+  margin: 4px 0.5rem;
 }
-.inputContainerMain {
-  display: flex;
+
+/* styling inputs */
+[type="text"]:active,
+[type="text"]:focus {
+  outline: 0;
+  border: 2px solid #007bff;
 }
-.newTaskContainer {
-  flex: 1 1 200px;
+
+.title {
+  font-size: 24px;
 }
-.noteContainer:first-child {
-    display: none;
+
+.done {
+  text-decoration: line-through;
 }
-.cbDone::before {
-    content: " ";
-    display: inline;
+.doneCheckbox {
+  margin: 5px 8px;
 }
-/* ========================================= */
-/* Navigation / left panel */
-#leftNav {
-    padding: 10px;
-    background-color: rgb(100, 100, 100);
-}
-.newTask {
-  width: 100%;
-}
-.fa-trash-o {
-  color: var(--cftwdb);
-  margin-left: 10px;
-}
-.noteAndTool {
-  display: flex;
-  justify-content: start;
-  align-items: center;
-}
-.titleContainer {
-  display: grid;
-  grid-template-columns: 1fr 15px;
-  align-items: center;
-  border-bottom: 1px solid var(--cftwdb);
-}
-.titleContainer .fa {
-  justify-self: end;
+.todo {
+  margin: 5px 8px;
   margin-left: 0px;
 }
-.paragraphNotes {
-  margin-top: 5px;
+.todoPart,
+.titleContainer,
+#header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+
+  align-items: baseline;
 }
-/* Setting up the checkboxes */
-.done {
-  appearance: none;
-  background-color: var(--cftwdb);
-  padding: 9px;
-  border-radius: 3px;
-  display: inline-block;
-  position: relative;
-}
-.done:active,
-.done:checked:active {
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05),
-    inset 0px 1px 3px rgba(0, 0, 0, 0.1);
-}
-.done:checked {
-  background-color: var(--cfi);
-  border: 1px solid #adb8c0;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05),
-    inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05),
-    inset 15px 10px -12px rgba(255, 255, 255, 0.1);
-  color: #99a1a7;
-}
-.done:checked:after {
-  content: "\2714";
-  font-size: 14px;
-  position: absolute;
-  top: 0px;
-  left: 3px;
-  color: #99a1a7;
-}
-/* Class for Search() */
-.search {
-  color: rgba(214, 214, 0, 0.95);
-}
-/* media queries for screens with 700px or less */
-@media only screen and (max-width: 600px) {
-  #wrapperAll {
-    padding: 2px 4px;
-    grid-template-columns: 65px 1fr;
-    grid-template-rows: 100px minmax(300px, 1fr);
-  }
-  #header {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 43px 43px;
-    justify-items: center;
-  }
-  #tradeMark {
-    display: none;
-  }
-  #searchBar {
-    display: flex;
-  }
-  .noteContainer {
-    flex: 1 1;
-  }
-  .inputContainer {
-    max-width: 400px;
-    flex: 1 1;
-  }
-  #inputCategory {
-    width: 65px;
-  }
-}
-/* media queries for screens with at least 1100px of width */
-@media only screen and (min-width: 1100px) {
-  .inputContainer {
-    max-width: 700px;
-  }
-  #inputCategory {
-    width: 190px;
-  }
+
+#btnAddList {
+  background-color: #004794;
 }
