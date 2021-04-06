@@ -4,9 +4,21 @@ class Model {
       {
         listId: 0,
         title: "hello",
-        toDos: [{ id: 0, text: "wash my hands", done: false }],
+        toDos: [{ id: 0, text: "wash my hands", done: false, parentId: 0 }],
       },
     ];
+
+    this.showStatus = "all";
+  }
+
+  showAll() {
+    this.showStatus = "all";
+  }
+  showDone() {
+    this.showStatus = "done";
+  }
+  showActive() {
+    this.showStatus = "active";
   }
 
   findList(listId) {
@@ -43,6 +55,7 @@ class Model {
       id: list.toDos.length,
       text,
       done: false,
+      parentId: list.listId,
     });
   }
 

@@ -8,9 +8,14 @@
 .completed {
   text-decoration: line-through red 2px;
 }
+body,
+html {
+  height: 100%;
+}
 /* the main flex box containing the whole app */
 #wrapperAll {
   display: flex;
+  height: 100%;
   flex-direction: column;
   gap: 20px;
 }
@@ -44,29 +49,38 @@ button {
   border: 2px solid #007bff;
   margin: 4px 0.5rem;
 }
-.noMarginLeft {
-  margin-left: 0px;
-}
 
-.marginLeft {
-  margin-left: 4px;
-}
 /* styling inputs */
 [type="text"]:active,
 [type="text"]:focus {
   outline: 0;
   border: 2px solid #007bff;
 }
-.listTitle {
-  display: inline;
-  font-size: 1.5rem;
-  font-weight: bold;
+
+.title {
+  font-size: 24px;
 }
-.doContainer {
-  margin-top: 4px;
-  border: 2px solid wheat;
-  border-radius: 4px;
+
+.done {
+  text-decoration: line-through;
 }
-.do {
-  padding: 0.4rem 0.7rem;
+.doneCheckbox {
+  margin: 5px 8px;
+}
+.todo {
+  margin: 5px 8px;
+  margin-left: 0px;
+}
+.todoPart,
+.titleContainer,
+#header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+
+  align-items: baseline;
+}
+
+#btnAddList {
+  background-color: #004794;
 }
