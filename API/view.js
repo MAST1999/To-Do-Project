@@ -78,289 +78,101 @@ class View {
       this.mainBody.appendChild(this.message);
       return;
     }
-    switch (showStatus) {
-      case "all": {
-        let lastChildOfMainBody = this.mainBody.lastElementChild;
-        while (lastChildOfMainBody) {
-          this.mainBody.removeChild(lastChildOfMainBody);
-          lastChildOfMainBody = this.mainBody.lastElementChild;
-        }
-        listModel.forEach((list) => {
-          const listContainer = this.createNewElement("div", "listContainer");
-          listContainer.id = list.listId;
 
-          const titleContainer = this.createNewElement("div", "titleContainer");
-          const title = this.createNewElement("div", "title");
-          title.id = `title-${list.listId}`;
-          this.newTodoContainer = this.createNewElement(
-            "div",
-            "newTodoContainer"
-          );
+    let lastChildOfMainBody = this.mainBody.lastElementChild;
+    while (lastChildOfMainBody) {
+      this.mainBody.removeChild(lastChildOfMainBody);
+      lastChildOfMainBody = this.mainBody.lastElementChild;
+    }
+    listModel.forEach((list) => {
+      const listContainer = this.createNewElement("div", "listContainer");
+      listContainer.id = list.listId;
 
-          const inputNewTodo = this.createNewElement("input", "inputTodo");
-          inputNewTodo.type = "text";
-          const btnAddTodo = this.createNewElement("button", "addTodo");
-          btnAddTodo.type = "button";
-          btnAddTodo.textContent = "Add New Todo";
-          const newTodoContainer = this.createNewElement(
-            "div",
-            "newTodoContainer"
-          );
-          newTodoContainer.append(inputNewTodo, btnAddTodo);
-          title.textContent = list.title;
-          inputNewTodo.id = `inputTodo-${list.listId}`;
-          btnAddTodo.id = `addTodo-${list.listId}`;
+      const titleContainer = this.createNewElement("div", "titleContainer");
+      const title = this.createNewElement("div", "title");
+      title.id = `title-${list.listId}`;
+      this.newTodoContainer = this.createNewElement("div", "newTodoContainer");
 
-          // create the delete button
-          const deleteList = this.createNewElement("button", "deleteList");
-          deleteList.id = `deleteList-${list.listId}`;
-          deleteList.textContent = "Delete";
+      const inputNewTodo = this.createNewElement("input", "inputTodo");
+      inputNewTodo.type = "text";
+      const btnAddTodo = this.createNewElement("button", "addTodo");
+      btnAddTodo.type = "button";
+      btnAddTodo.textContent = "Add New Todo";
+      const newTodoContainer = this.createNewElement("div", "newTodoContainer");
+      newTodoContainer.append(inputNewTodo, btnAddTodo);
+      title.textContent = list.title;
+      inputNewTodo.id = `inputTodo-${list.listId}`;
+      btnAddTodo.id = `addTodo-${list.listId}`;
 
-          // create the edit button
-          const editTitle = this.createNewElement("button", "editTitle");
-          editTitle.id = `editList-${list.listId}`;
-          editTitle.textContent = "Edit";
-          titleContainer.append(title, editTitle, deleteList);
-          listContainer.appendChild(titleContainer);
-          listContainer.appendChild(newTodoContainer);
-          listContainer.appendChild(this.newTodoContainer);
-          const todoContainer = this.createNewElement("div", "todoContainer");
-          const toDos = list.toDos;
+      // create the delete button
+      const deleteList = this.createNewElement("button", "deleteList");
+      deleteList.id = `deleteList-${list.listId}`;
+      deleteList.textContent = "Delete";
 
-          toDos.forEach((todo) => {
-            const { id, text, done, parentId } = todo;
+      // create the edit button
+      const editTitle = this.createNewElement("button", "editTitle");
+      editTitle.id = `editList-${list.listId}`;
+      editTitle.textContent = "Edit";
+      titleContainer.append(title, editTitle, deleteList);
+      listContainer.appendChild(titleContainer);
+      listContainer.appendChild(newTodoContainer);
+      listContainer.appendChild(this.newTodoContainer);
+      const todoContainer = this.createNewElement("div", "todoContainer");
+      const toDos = list.toDos;
 
-            // each todo with it's corresponding checkbox, edit and delete will be in todoElementPart
-            const todoElementPart = this.createNewElement("div", "todoPart");
-            const todoElement = this.createNewElement("p", "todo");
-            todoElement.id = `${list.listId}-${id}`;
-            todoElement.textContent = text;
+      toDos.forEach((todo) => {
+        const { id, text, done, parentId } = todo;
 
-            // depending on if it's done or not add a different class
-            done
-              ? todoElement.classList.add("done")
-              : todoElement.classList.add("notDone");
-            todoElement.setAttribute("parentId", parentId);
+        // each todo with it's corresponding checkbox, edit and delete will be in todoElementPart
+        const todoElementPart = this.createNewElement("div", "todoPart");
+        const todoElement = this.createNewElement("p", "todo");
+        todoElement.id = `${list.listId}-${id}`;
+        todoElement.textContent = text;
 
-            // create the checkbox
-            const checkbox = this.createNewElement("input", "doneCheckbox");
-            checkbox.type = "checkbox";
-            checkbox.id = `checkbox-${list.listId}-${id}`;
-            done ? (checkbox.checked = true) : (checkbox.checked = false);
+        // depending on if it's done or not add a different class
+        done
+          ? todoElement.classList.add("done")
+          : todoElement.classList.add("notDone");
+        todoElement.setAttribute("parentId", parentId);
 
-            // create the delete button
-            const deleteTodo = this.createNewElement("button", "deleteTodo");
-            deleteTodo.id = `deleteTodo-${list.listId}-${id}`;
-            deleteTodo.textContent = "Delete";
+        // create the checkbox
+        const checkbox = this.createNewElement("input", "doneCheckbox");
+        checkbox.type = "checkbox";
+        checkbox.id = `checkbox-${list.listId}-${id}`;
+        done ? (checkbox.checked = true) : (checkbox.checked = false);
 
-            // create the edit button
-            const editTodo = this.createNewElement("button", "editTodo");
-            editTodo.id = `editTodo-${list.listId}-${id}`;
-            editTodo.textContent = "Edit";
+        // create the delete button
+        const deleteTodo = this.createNewElement("button", "deleteTodo");
+        deleteTodo.id = `deleteTodo-${list.listId}-${id}`;
+        deleteTodo.textContent = "Delete";
 
+        // create the edit button
+        const editTodo = this.createNewElement("button", "editTodo");
+        editTodo.id = `editTodo-${list.listId}-${id}`;
+        editTodo.textContent = "Edit";
+        switch (showStatus) {
+          case "all":
             todoElementPart.append(todoElement, checkbox, editTodo, deleteTodo);
             todoContainer.appendChild(todoElementPart);
-          });
-
-          listContainer.appendChild(todoContainer);
-
-          this.mainBody.appendChild(listContainer);
-        });
-        return;
-      }
-      case "done": {
-        let lastChildOfMainBody = this.mainBody.lastElementChild;
-        while (lastChildOfMainBody) {
-          this.mainBody.removeChild(lastChildOfMainBody);
-          lastChildOfMainBody = this.mainBody.lastElementChild;
+            break;
+          case "done":
+            if (!todo.done) break;
+            todoElementPart.append(todoElement, checkbox, editTodo, deleteTodo);
+            todoContainer.appendChild(todoElementPart);
+            break;
+          case "active":
+            if (todo.done) break;
+            todoElementPart.append(todoElement, checkbox, editTodo, deleteTodo);
+            todoContainer.appendChild(todoElementPart);
+            break;
         }
-        listModel.forEach((list) => {
-          const listContainer = this.createNewElement("div", "listContainer");
-          listContainer.id = list.listId;
+      });
 
-          const titleContainer = this.createNewElement("div", "titleContainer");
-          const title = this.createNewElement("div", "title");
-          title.id = `title-${list.listId}`;
-          this.newTodoContainer = this.createNewElement(
-            "div",
-            "newTodoContainer"
-          );
+      listContainer.appendChild(todoContainer);
 
-          const inputNewTodo = this.createNewElement("input", "inputTodo");
-          inputNewTodo.type = "text";
-          const btnAddTodo = this.createNewElement("button", "addTodo");
-          btnAddTodo.type = "button";
-          btnAddTodo.textContent = "Add New Todo";
-          const newTodoContainer = this.createNewElement(
-            "div",
-            "newTodoContainer"
-          );
-          newTodoContainer.append(inputNewTodo, btnAddTodo);
-          title.textContent = list.title;
-          inputNewTodo.id = `inputTodo-${list.listId}`;
-          btnAddTodo.id = `addTodo-${list.listId}`;
-
-          // create the delete button
-          const deleteList = this.createNewElement("button", "deleteList");
-          deleteList.id = `deleteList-${list.listId}`;
-          deleteList.textContent = "Delete";
-
-          // create the edit button
-          const editTitle = this.createNewElement("button", "editTitle");
-          editTitle.id = `editList-${list.listId}`;
-          editTitle.textContent = "Edit";
-          titleContainer.append(title, editTitle, deleteList);
-          listContainer.appendChild(titleContainer);
-          listContainer.appendChild(newTodoContainer);
-          listContainer.appendChild(this.newTodoContainer);
-          const todoContainer = this.createNewElement("div", "todoContainer");
-          const toDos = list.toDos;
-
-          toDos.forEach((todo) => {
-            const { id, text, done, parentId } = todo;
-
-            if (done) {
-              // each todo with it's corresponding checkbox, edit and delete will be in todoElementPart
-              const todoElementPart = this.createNewElement("div", "todoPart");
-              const todoElement = this.createNewElement("p", "todo");
-              todoElement.id = `${list.listId}-${id}`;
-              todoElement.textContent = text;
-
-              // depending on if it's done or not add a different class
-              done
-                ? todoElement.classList.add("done")
-                : todoElement.classList.add("notDone");
-              todoElement.setAttribute("parentId", parentId);
-
-              // create the checkbox
-              const checkbox = this.createNewElement("input", "doneCheckbox");
-              checkbox.type = "checkbox";
-              checkbox.id = `checkbox-${list.listId}-${id}`;
-              done ? (checkbox.checked = true) : (checkbox.checked = false);
-
-              // create the delete button
-              const deleteTodo = this.createNewElement("button", "deleteTodo");
-              deleteTodo.id = `deleteTodo-${list.listId}-${id}`;
-              deleteTodo.textContent = "Delete";
-
-              // create the edit button
-              const editTodo = this.createNewElement("button", "editTodo");
-              editTodo.id = `editTodo-${list.listId}-${id}`;
-              editTodo.textContent = "Edit";
-
-              todoElementPart.append(
-                todoElement,
-                checkbox,
-                editTodo,
-                deleteTodo
-              );
-              todoContainer.appendChild(todoElementPart);
-            }
-          });
-
-          listContainer.appendChild(todoContainer);
-
-          this.mainBody.appendChild(listContainer);
-        });
-        return;
-      }
-      case "active": {
-        let lastChildOfMainBody = this.mainBody.lastElementChild;
-        while (lastChildOfMainBody) {
-          this.mainBody.removeChild(lastChildOfMainBody);
-          lastChildOfMainBody = this.mainBody.lastElementChild;
-        }
-        listModel.forEach((list) => {
-          const listContainer = this.createNewElement("div", "listContainer");
-          listContainer.id = list.listId;
-
-          const titleContainer = this.createNewElement("div", "titleContainer");
-          const title = this.createNewElement("div", "title");
-          title.id = `title-${list.listId}`;
-          this.newTodoContainer = this.createNewElement(
-            "div",
-            "newTodoContainer"
-          );
-
-          const inputNewTodo = this.createNewElement("input", "inputTodo");
-          inputNewTodo.type = "text";
-          const btnAddTodo = this.createNewElement("button", "addTodo");
-          btnAddTodo.type = "button";
-          btnAddTodo.textContent = "Add New Todo";
-          const newTodoContainer = this.createNewElement(
-            "div",
-            "newTodoContainer"
-          );
-          newTodoContainer.append(inputNewTodo, btnAddTodo);
-          title.textContent = list.title;
-          inputNewTodo.id = `inputTodo-${list.listId}`;
-          btnAddTodo.id = `addTodo-${list.listId}`;
-
-          // create the delete button
-          const deleteList = this.createNewElement("button", "deleteList");
-          deleteList.id = `deleteList-${list.listId}`;
-          deleteList.textContent = "Delete";
-
-          // create the edit button
-          const editTitle = this.createNewElement("button", "editTitle");
-          editTitle.id = `editList-${list.listId}`;
-          editTitle.textContent = "Edit";
-          titleContainer.append(title, editTitle, deleteList);
-          listContainer.appendChild(titleContainer);
-          listContainer.appendChild(newTodoContainer);
-          listContainer.appendChild(this.newTodoContainer);
-          const todoContainer = this.createNewElement("div", "todoContainer");
-          const toDos = list.toDos;
-
-          toDos.forEach((todo) => {
-            const { id, text, done, parentId } = todo;
-
-            if (!done) {
-              // each todo with it's corresponding checkbox, edit and delete will be in todoElementPart
-              const todoElementPart = this.createNewElement("div", "todoPart");
-              const todoElement = this.createNewElement("p", "todo");
-              todoElement.id = `${list.listId}-${id}`;
-              todoElement.textContent = text;
-
-              // depending on if it's done or not add a different class
-              done
-                ? todoElement.classList.add("done")
-                : todoElement.classList.add("notDone");
-              todoElement.setAttribute("parentId", parentId);
-
-              // create the checkbox
-              const checkbox = this.createNewElement("input", "doneCheckbox");
-              checkbox.type = "checkbox";
-              checkbox.id = `checkbox-${list.listId}-${id}`;
-              done ? (checkbox.checked = true) : (checkbox.checked = false);
-
-              // create the delete button
-              const deleteTodo = this.createNewElement("button", "deleteTodo");
-              deleteTodo.id = `deleteTodo-${list.listId}-${id}`;
-              deleteTodo.textContent = "Delete";
-
-              // create the edit button
-              const editTodo = this.createNewElement("button", "editTodo");
-              editTodo.id = `editTodo-${list.listId}-${id}`;
-              editTodo.textContent = "Edit";
-
-              todoElementPart.append(
-                todoElement,
-                checkbox,
-                editTodo,
-                deleteTodo
-              );
-              todoContainer.appendChild(todoElementPart);
-            }
-          });
-
-          listContainer.appendChild(todoContainer);
-
-          this.mainBody.appendChild(listContainer);
-        });
-        return;
-      }
-    }
+      this.mainBody.appendChild(listContainer);
+    });
+    return;
   }
 
   bindAddTodo(addTodo) {

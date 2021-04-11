@@ -13,7 +13,9 @@ class Controller {
     this.handleShowAll = this.handleShowAll.bind(this);
     this.handleShowDone = this.handleShowDone.bind(this);
     this.handleShowActive = this.handleShowActive.bind(this);
-    this.onTodoListChange();
+    this.handelOnTodoListChange = this.handelOnTodoListChange.bind(this);
+
+    this.model.bindTodoListChanged(this.handelOnTodoListChange);
 
     this.view.bindAddTodo(this.handleAddTodo);
     this.view.bindRemoveTodo(this.handleRemoveTodo);
@@ -25,60 +27,52 @@ class Controller {
     this.view.bindShowAll(this.handleShowAll);
     this.view.bindShowDone(this.handleShowDone);
     this.view.bindShowActive(this.handleShowActive);
+
+    this.handelOnTodoListChange(this.model.listModel, this.model.showStatus);
   }
 
-  onTodoListChange() {
-    this.view.renderLists(this.model.listModel, this.model.showStatus);
+  handelOnTodoListChange(listModel, showStatus) {
+    this.view.renderLists(listModel, showStatus);
   }
 
   handleToggleTodo(listId, id) {
     this.model.toggleTodo(listId, id);
-    this.onTodoListChange();
   }
 
   handleAddTodo(listId, text) {
     this.model.addTodo(listId, text);
-    this.onTodoListChange();
   }
 
   handleRemoveTodo(listId, id) {
     this.model.removeTodo(listId, id);
-    this.onTodoListChange();
   }
 
   handleEditTodo(listId, id, text) {
     this.model.editTodo(listId, id, text);
-    this.onTodoListChange();
   }
 
   handelAddList(title) {
     this.model.addList(title);
-    this.onTodoListChange();
   }
 
   handleRemoveList(listId) {
     this.model.removeList(listId);
-    this.onTodoListChange();
   }
 
   handleEditTitle(listId, title) {
     this.model.editTitle(listId, title);
-    this.onTodoListChange();
   }
 
   handleShowAll() {
     this.model.showAll();
-    this.onTodoListChange();
   }
 
   handleShowDone() {
     this.model.showDone();
-    this.onTodoListChange();
   }
 
   handleShowActive() {
     this.model.showActive();
-    this.onTodoListChange();
   }
 }
 

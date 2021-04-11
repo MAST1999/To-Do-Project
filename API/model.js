@@ -13,12 +13,15 @@ class Model {
 
   showAll() {
     this.showStatus = "all";
+    this._render(this.listModel, this.showStatus);
   }
   showDone() {
     this.showStatus = "done";
+    this._render(this.listModel, this.showStatus);
   }
   showActive() {
     this.showStatus = "active";
+    this._render(this.listModel, this.showStatus);
   }
 
   findList(listId) {
@@ -31,15 +34,18 @@ class Model {
 
   addList(title) {
     this.listModel.push({ listId: this.listModel.length, title, toDos: [] });
+    this._render(this.listModel, this.showStatus);
   }
 
   editTitle(listId, title) {
     const list = this.findList(listId);
     list.title = title;
+    this._render(this.listModel, this.showStatus);
   }
 
   removeList(listId) {
     this.listModel = this.listModel.filter((mList) => mList.listId !== listId);
+    this._render(this.listModel, this.showStatus);
   }
 
   findTodo(list, id) {
@@ -57,11 +63,13 @@ class Model {
       done: false,
       parentId: list.listId,
     });
+    this._render(this.listModel, this.showStatus);
   }
 
   removeTodo(listId, id) {
     const list = this.findList(listId);
     list.toDos = list.toDos.filter((todo) => todo.id !== id);
+    this._render(this.listModel, this.showStatus);
   }
 
   editTodo(listId, id, text) {
@@ -69,6 +77,7 @@ class Model {
     const todo = this.findTodo(list, id);
 
     todo.text = text;
+    this._render(this.listModel, this.showStatus);
   }
 
   toggleTodo(listId, id) {
@@ -76,6 +85,15 @@ class Model {
     const todo = this.findTodo(list, id);
 
     todo.done = !todo.done;
+    this._render(this.listModel, this.showStatus);
+  }
+
+  bindTodoListChanged(callback) {
+    this.handelOnTodoListChange = callback;
+  }
+
+  _render(listModel, showStatus) {
+    this.handelOnTodoListChange(listModel, showStatus);
   }
 }
 
