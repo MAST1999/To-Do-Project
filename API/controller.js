@@ -3,18 +3,6 @@ class Controller {
     this.model = Model;
     this.view = View;
 
-    this.handleAddTodo = this.handleAddTodo.bind(this);
-    this.handleRemoveTodo = this.handleRemoveTodo.bind(this);
-    this.handleEditTodo = this.handleEditTodo.bind(this);
-    this.handleToggleTodo = this.handleToggleTodo.bind(this);
-    this.handelAddList = this.handelAddList.bind(this);
-    this.handleRemoveList = this.handleRemoveList.bind(this);
-    this.handleEditTitle = this.handleEditTitle.bind(this);
-    this.handleShowAll = this.handleShowAll.bind(this);
-    this.handleShowDone = this.handleShowDone.bind(this);
-    this.handleShowActive = this.handleShowActive.bind(this);
-    this.handelOnTodoListChange = this.handelOnTodoListChange.bind(this);
-
     this.model.bindTodoListChanged(this.handelOnTodoListChange);
 
     this.view.bindAddTodo(this.handleAddTodo);
@@ -31,49 +19,49 @@ class Controller {
     this.handelOnTodoListChange(this.model.listModel, this.model.showStatus);
   }
 
-  handelOnTodoListChange(listModel, showStatus) {
+  handelOnTodoListChange = (listModel, showStatus) => {
     this.view.renderLists(listModel, showStatus);
-  }
+  };
 
-  handleToggleTodo(listId, id) {
+  handleToggleTodo = (listId, id) => {
     this.model.toggleTodo(listId, id);
-  }
+  };
 
-  handleAddTodo(listId, text) {
+  handleAddTodo = (listId, text) => {
     this.model.addTodo(listId, text);
-  }
+  };
 
-  handleRemoveTodo(listId, id) {
+  handleRemoveTodo = (listId, id) => {
     this.model.removeTodo(listId, id);
-  }
+  };
 
-  handleEditTodo(listId, id, text) {
+  handleEditTodo = (listId, id, text) => {
     this.model.editTodo(listId, id, text);
-  }
+  };
 
-  handelAddList(title) {
+  handelAddList = (title) => {
     this.model.addList(title);
-  }
+  };
 
-  handleRemoveList(listId) {
+  handleRemoveList = (listId) => {
     this.model.removeList(listId);
-  }
+  };
 
-  handleEditTitle(listId, title) {
+  handleEditTitle = (listId, title) => {
     this.model.editTitle(listId, title);
-  }
+  };
 
-  handleShowAll() {
+  handleShowAll = () => {
     this.model.showAll();
-  }
+  };
 
-  handleShowDone() {
+  handleShowDone = () => {
     this.model.showDone();
-  }
+  };
 
-  handleShowActive() {
+  handleShowActive = () => {
     this.model.showActive();
-  }
+  };
 }
 
 export default Controller;

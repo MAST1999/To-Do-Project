@@ -172,7 +172,6 @@ class View {
 
       this.mainBody.appendChild(listContainer);
     });
-    return;
   }
 
   bindAddTodo(addTodo) {
