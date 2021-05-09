@@ -3,5 +3,6 @@
         "afterbegin",
         "cficb",
         "cftwdb"
-    ]
+    ],
+    "liveServer.settings.port": 5501
 }
