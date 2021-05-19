@@ -6,17 +6,26 @@
   "configurations": [
     {
       "type": "firefox",
-      "request": "launch",
-      "reAttach": true,
-      "name": "Launch index.html",
-      "file": "${workspaceFolder}/index.html"
+      "request": "attach",
+      "name": "Attach",
+      "port": 3000,
+      "url": "http://localhost/"
     },
     {
-      "type": "node",
+      "type": "firefox",
       "request": "launch",
+      "reAttach": true,
+      "name": "Launch localhost",
+      "url": "http://localhost/",
+      "port": 3000,
+      "webRoot": "${workspaceFolder}"
+    },
+    {
       "name": "Launch Program",
+      "program": "${workspaceFolder}/server/server.js",
+      "request": "launch",
       "skipFiles": ["<node_internals>/**"],
-      "program": "${workspaceFolder}\\jsMVC.js"
+      "type": "pwa-node"
     }
   ]
 }

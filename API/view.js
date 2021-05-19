@@ -26,13 +26,23 @@ class View {
     this.btnShowActive = this.createNewElement("button");
     this.btnShowActive.id = "showActive";
     this.btnShowActive.textContent = "Show Active";
+    // upload and download buttons
+    this.btnUpload = this.createNewElement("button");
+    this.btnUpload.id = "upload";
+    this.btnUpload.textContent = "Upload";
+
+    this.btnDownload = this.createNewElement("button");
+    this.btnDownload.id = "download";
+    this.btnDownload.textContent = "Download";
 
     this.customBtnContainer = this.createNewElement("div");
     this.customBtnContainer.id = "customBtnContainer";
     this.customBtnContainer.append(
       this.btnShowAll,
       this.btnShowActive,
-      this.btnShowDone
+      this.btnShowDone,
+      this.btnUpload,
+      this.btnDownload
     );
 
     // append to header
@@ -307,6 +317,20 @@ class View {
     this.btnShowActive.addEventListener("click", (event) => {
       event.preventDefault();
       showActive();
+    });
+  }
+
+  bindUpload(upload) {
+    this.btnUpload.addEventListener("click", (event) => {
+      event.preventDefault();
+      upload();
+    });
+  }
+
+  bindDownload(download) {
+    this.btnDownload.addEventListener("click", (event) => {
+      event.preventDefault();
+      download();
     });
   }
 }

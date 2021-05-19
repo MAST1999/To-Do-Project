@@ -1,12 +1,16 @@
 class Model {
   constructor() {
-    this.listModel = [
-      {
-        listId: 0,
-        title: "hello",
-        toDos: [{ id: 0, text: "wash my hands", done: false, parentId: 0 }],
-      },
-    ];
+    if (JSON.parse(localStorage.getItem("listModel"))) {
+      this.listModel = JSON.parse(localStorage.getItem("listModel"));
+    } else {
+      this.listModel = [
+        {
+          listId: 0,
+          title: "hello",
+          toDos: [{ id: 0, text: "wash my hands", done: false, parentId: 0 }],
+        },
+      ];
+    }
 
     this.showStatus = "all";
   }
@@ -14,14 +18,17 @@ class Model {
   showAll() {
     this.showStatus = "all";
     this._render(this.listModel, this.showStatus);
+    localStorage.setItem("listModel", JSON.stringify(this.listModel));
   }
   showDone() {
     this.showStatus = "done";
     this._render(this.listModel, this.showStatus);
+    localStorage.setItem("listModel", JSON.stringify(this.listModel));
   }
   showActive() {
     this.showStatus = "active";
     this._render(this.listModel, this.showStatus);
+    localStorage.setItem("listModel", JSON.stringify(this.listModel));
   }
 
   findList(listId) {
@@ -35,17 +42,20 @@ class Model {
   addList(title) {
     this.listModel.push({ listId: this.listModel.length, title, toDos: [] });
     this._render(this.listModel, this.showStatus);
+    localStorage.setItem("listModel", JSON.stringify(this.listModel));
   }
 
   editTitle(listId, title) {
     const list = this.findList(listId);
     list.title = title;
     this._render(this.listModel, this.showStatus);
+    localStorage.setItem("listModel", JSON.stringify(this.listModel));
   }
 
   removeList(listId) {
     this.listModel = this.listModel.filter((mList) => mList.listId !== listId);
     this._render(this.listModel, this.showStatus);
+    localStorage.setItem("listModel", JSON.stringify(this.listModel));
   }
 
   findTodo(list, id) {
@@ -64,12 +74,14 @@ class Model {
       parentId: list.listId,
     });
     this._render(this.listModel, this.showStatus);
+    localStorage.setItem("listModel", JSON.stringify(this.listModel));
   }
 
   removeTodo(listId, id) {
     const list = this.findList(listId);
     list.toDos = list.toDos.filter((todo) => todo.id !== id);
     this._render(this.listModel, this.showStatus);
+    localStorage.setItem("listModel", JSON.stringify(this.listModel));
   }
 
   editTodo(listId, id, text) {
@@ -78,6 +90,7 @@ class Model {
 
     todo.text = text;
     this._render(this.listModel, this.showStatus);
+    localStorage.setItem("listModel", JSON.stringify(this.listModel));
   }
 
   toggleTodo(listId, id) {
@@ -86,6 +99,7 @@ class Model {
 
     todo.done = !todo.done;
     this._render(this.listModel, this.showStatus);
+    localStorage.setItem("listModel", JSON.stringify(this.listModel));
   }
 
   bindTodoListChanged(callback) {
@@ -94,6 +108,25 @@ class Model {
 
   _render(listModel, showStatus) {
     this.handelOnTodoListChange(listModel, showStatus);
+  }
+
+  async upload() {
+    const res = await fetch("http://localhost:3000/upload", {
+      method: "POST",
+      body: JSON.stringify(this.listModel),
+    });
+    const result = await res.json();
+    console.log(result);
+  }
+
+  async download() {
+    const res = await fetch("http://localhost:3000/download", {
+      method: "GET",
+    });
+    const data = await res.json();
+    this.listModel = data;
+    this._render(this.listModel, this.showStatus);
+    localStorage.setItem("listModel", JSON.stringify(this.listModel));
   }
 }
 

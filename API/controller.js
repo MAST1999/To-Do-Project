@@ -15,6 +15,8 @@ class Controller {
     this.view.bindShowAll(this.handleShowAll);
     this.view.bindShowDone(this.handleShowDone);
     this.view.bindShowActive(this.handleShowActive);
+    this.view.bindUpload(this.handleUpload);
+    this.view.bindDownload(this.handleDownload);
 
     this.handelOnTodoListChange(this.model.listModel, this.model.showStatus);
   }
@@ -61,6 +63,14 @@ class Controller {
 
   handleShowActive = () => {
     this.model.showActive();
+  };
+
+  handleUpload = () => {
+    this.model.upload();
+  };
+
+  handleDownload = () => {
+    this.model.download();
   };
 }
 
