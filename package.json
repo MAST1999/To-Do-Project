@@ -7,6 +7,10 @@
   "author": "Muhammad Amin Saffari Taheri <ma.saffaritaheri@gmail.com>",
   "license": "MIT",
   "private": false,
+  "scripts": {
+    "start": "pm2 start ./server/server.js --watch",
+    "stop": "pm2 stop all"
+  },
   "devDependencies": {
     "@babel/core": "^7.13.15",
     "@babel/eslint-parser": "^7.13.14",

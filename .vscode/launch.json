@@ -5,27 +5,19 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "firefox",
-      "request": "attach",
-      "name": "Attach",
-      "port": 3000,
-      "url": "http://localhost/"
-    },
-    {
-      "type": "firefox",
-      "request": "launch",
-      "reAttach": true,
-      "name": "Launch localhost",
-      "url": "http://localhost/",
-      "port": 3000,
-      "webRoot": "${workspaceFolder}"
-    },
-    {
-      "name": "Launch Program",
+      "name": "Launch Server",
       "program": "${workspaceFolder}/server/server.js",
       "request": "launch",
       "skipFiles": ["<node_internals>/**"],
       "type": "pwa-node"
+    },
+    {
+      "type": "firefox",
+      "request": "attach",
+      "name": "Attach",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}",
+      "port": 4000
     }
   ]
 }
