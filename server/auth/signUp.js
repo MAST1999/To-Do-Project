@@ -19,11 +19,13 @@ const signUp = (req, res) => {
       for (let user in obj) {
         if (obj[user].username === jsonData.username) {
           res.setHeader("Content-Type", "text/html");
+          res.setHeader("Access-Control-Allow-Origin", "*");
           res.end("<p>User Already Exists</p>");
           return;
         }
       }
 
+      jsonData.id = Object.keys(obj).length + 1;
       obj.push(jsonData);
 
       fs.writeFile(absolutePath, JSON.stringify(obj), "utf-8", (err) => {
@@ -31,6 +33,7 @@ const signUp = (req, res) => {
         console.log("The user Was Saved!");
       });
       res.setHeader("Content-type", "application/json");
+      res.setHeader("Access-Control-Allow-Origin", "*");
       res.end(JSON.stringify(obj));
       return;
     });

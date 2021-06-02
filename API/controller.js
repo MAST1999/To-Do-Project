@@ -17,6 +17,7 @@ class Controller {
     this.view.bindShowActive(this.handleShowActive);
     this.view.bindUpload(this.handleUpload);
     this.view.bindDownload(this.handleDownload);
+    this.view.goToSignIn();
 
     this.handelOnTodoListChange(this.model.listModel, this.model.showStatus);
   }

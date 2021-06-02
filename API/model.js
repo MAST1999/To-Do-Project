@@ -12,6 +12,8 @@ class Model {
       ];
     }
 
+    this.user = "reza";
+
     this.showStatus = "all";
   }
 
@@ -120,11 +122,16 @@ class Model {
   }
 
   async download() {
-    const res = await fetch("http://localhost:3000/download", {
-      method: "GET",
-    });
+    let url = new URL("http://localhost:3000/download");
+    let params = { user: this.user };
+    url.search = new URLSearchParams(params).toString();
+    const res = await fetch(url);
+    if (res.status === 404) {
+      alert(`User: ${this.user}, doesn't exist!`);
+      return;
+    }
     const data = await res.json();
-    this.listModel = data;
+    if (data) this.listModel = data;
     this._render(this.listModel, this.showStatus);
     localStorage.setItem("listModel", JSON.stringify(this.listModel));
   }

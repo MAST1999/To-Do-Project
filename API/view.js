@@ -1,6 +1,10 @@
+import signUpContainer from "./signupPage.js";
+
 class View {
   constructor() {
     this.wrapperAll = this.getSingleElement("#wrapperAll");
+
+    this.signUpPage = signUpContainer;
 
     // header ---------------------
     this.header = this.createNewElement("div");
@@ -35,6 +39,11 @@ class View {
     this.btnDownload.id = "download";
     this.btnDownload.textContent = "Download";
 
+    // sign out button
+    this.btnSignOut = this.createNewElement("button");
+    this.btnSignOut.id = "sign-out";
+    this.btnSignOut.textContent = "Sign Out";
+
     this.customBtnContainer = this.createNewElement("div");
     this.customBtnContainer.id = "customBtnContainer";
     this.customBtnContainer.append(
@@ -42,7 +51,8 @@ class View {
       this.btnShowActive,
       this.btnShowDone,
       this.btnUpload,
-      this.btnDownload
+      this.btnDownload,
+      this.btnSignOut
     );
 
     // append to header
@@ -331,6 +341,14 @@ class View {
     this.btnDownload.addEventListener("click", (event) => {
       event.preventDefault();
       download();
+    });
+  }
+
+  goToSignIn() {
+    this.btnSignOut.addEventListener("click", () => {
+      this.wrapperAll.innerHTML = "";
+      console.log(this.signUpPage);
+      this.wrapperAll.append(this.signUpPage);
     });
   }
 }

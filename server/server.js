@@ -3,43 +3,61 @@ const fs = require("fs");
 const auth = require("./auth");
 
 const server = http.createServer((req, res) => {
-  console.log(req.url, req.method);
+  let want = "";
+  if (req.url.indexOf("?") !== -1) {
+    want = req.url.slice(0, req.url.indexOf("?"));
+  } else {
+    want = req.url;
+  }
+  console.log(want, req.method);
   console.log("request made");
 
   let path = "./";
   let data = "";
-  switch (req.url) {
+  switch (want) {
     case "/":
       res.setHeader("Content-Type", "text/html");
+      res.setHeader("Access-Control-Allow-Origin", "*");
       path += "index.html";
-      return;
+      break;
 
     case "/API/app.js":
       res.setHeader("Content-Type", "text/javascript");
+      res.setHeader("Access-Control-Allow-Origin", "*");
       path += "API/app.js";
       console.log("success");
-      return;
+      break;
 
     case "/API/controller.js":
       res.setHeader("Content-Type", "text/javascript");
+      res.setHeader("Access-Control-Allow-Origin", "*");
       path += "API/controller.js";
-      return;
+      break;
+
+    case "/API/signupPage.js":
+      res.setHeader("Content-Type", "text/javascript");
+      res.setHeader("Access-Control-Allow-Origin", "*");
+      path += "API/signupPage.js";
+      break;
 
     case "/API/model.js":
       res.setHeader("Content-Type", "text/javascript");
+      res.setHeader("Access-Control-Allow-Origin", "*");
       path += "API/model.js";
-      return;
+      break;
 
     case "/API/view.js":
       res.setHeader("Content-Type", "text/javascript");
+      res.setHeader("Access-Control-Allow-Origin", "*");
       path += "API/view.js";
-      return;
+      break;
 
     case "/style.css":
       res.setHeader("Content-Type", "text/css");
+      res.setHeader("Access-Control-Allow-Origin", "*");
       path += "style.css";
       console.log("success");
-      return;
+      break;
 
     case "/upload":
       req.on("data", (chunk) => {
@@ -52,22 +70,38 @@ const server = http.createServer((req, res) => {
           console.log("file was saved!");
         });
         res.setHeader("Content-Type", "application/json");
+        res.setHeader("Access-Control-Allow-Origin", "*");
         res.end(data);
       });
       return;
 
-    case "/download":
+    case "/download": {
       console.log("HERE");
-      res.setHeader("Content-Type", "application/json");
-      fs.readFile("./listModel.json", (err, data) => {
+
+      const reqURL = `http://localhost:3000${req.url}`;
+      let user = new URL(reqURL).searchParams.get("user");
+
+      fs.readFile("./server/listModel.json", (err, dataFile) => {
         if (err) {
           console.log(err);
           res.end(err);
         } else {
-          res.end(data);
+          let allLists = JSON.parse(dataFile);
+          for (let prop in allLists) {
+            if (prop === user) {
+              res.setHeader("Content-Type", "application/json");
+              res.setHeader("Access-Control-Allow-Origin", "*");
+              res.end(JSON.stringify(allLists[prop]));
+              return;
+            }
+          }
+          res.setHeader("Access-Control-Allow-Origin", "*");
+          res.statusCode = 404;
+          res.end();
         }
       });
       return;
+    }
 
     case "/users/post":
       auth.signUp(req, res);
