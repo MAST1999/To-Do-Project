@@ -88,6 +88,7 @@ class View {
 
   renderLists(listModel, showStatus) {
     this.wrapperAll.classList.remove("middle");
+    this.wrapperAll.innerHTML = "";
     this.wrapperAll.append(this.header, this.mainBody);
     if (listModel.length === 0) {
       this.message = this.createNewElement("p");
@@ -348,27 +349,79 @@ class View {
     });
   }
 
-  //TODO I need to make it easier to go between sign in and sign out
-  // goToSignOut(createAccount) {
+  routing(dispatch) {
+    switch (dispatch) {
+      case "SIGNIN":
+        this.wrapperAll.innerHTML = "";
+        this.wrapperAll.appendChild(this.signInPage);
+        break;
+      case "SIGNUP":
+        this.wrapperAll.innerHTML = "";
+        this.wrapperAll.appendChild(this.signUpPage);
+        break;
+      case "LISTS":
+        this.wrapperAll.innerHTML = "";
+        this.wrapperAll.append(this.header, this.mainBody);
+    }
+  }
 
-  // }
+  //* this is all the event for the routing process
+  bindRoutingView(createAccount, signin) {
+    //* this is for submit button in sign in page
+    this.wrapperAll.addEventListener("click", (event) => {
+      event.preventDefault();
 
-  goToSignIn(signin) {
-    this.btnSignOut.addEventListener("click", () => {
-      this.wrapperAll.classList.add("middle");
-      this.wrapperAll.innerHTML = "";
-      this.wrapperAll.append(this.signInPage);
+      const target = event.target;
+      if (target.id === "submit-signin") {
+        const username = document.querySelector("#user-input").value.trim();
+        const password = document.querySelector("#pass-input").value.trim();
 
-      document
-        .querySelector("#submit-signin")
-        .addEventListener("click", (event) => {
-          event.preventDefault();
+        signin(username, password);
+      }
+    });
 
-          signin(
-            document.querySelector(".user-input").value,
-            document.querySelector("#pass-input").value
-          );
-        });
+    //* this is for submit button in sign up page
+    this.wrapperAll.addEventListener("click", (event) => {
+      event.preventDefault();
+
+      const target = event.target;
+      if (target.id === "submit") {
+        const username = document.querySelector("#user-input").value.trim();
+        const password = document.querySelector("#pass-input").value.trim();
+        const repeatPass = document.querySelector("#pass-confirm").value.trim();
+
+        createAccount(username, password, repeatPass);
+      }
+    });
+
+    //* this is for the link in sign in page
+    this.wrapperAll.addEventListener("click", (event) => {
+      event.preventDefault();
+
+      const target = event.target;
+      if (target.id === "go-to-signup") {
+        this.routing("SIGNUP");
+      }
+    });
+
+    //* this is for the link to in sign up page
+    this.wrapperAll.addEventListener("click", (event) => {
+      event.preventDefault();
+
+      const target = event.target;
+      if (target.id === "link-signin") {
+        this.routing("SIGNIN");
+      }
+    });
+
+    //* this is for the sign out button in lists
+    this.wrapperAll.addEventListener("click", (event) => {
+      event.preventDefault();
+
+      const target = event.target;
+      if (target.id === "sign-out") {
+        this.routing("SIGNIN");
+      }
     });
   }
 }

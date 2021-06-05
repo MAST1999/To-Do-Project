@@ -4,6 +4,7 @@ class Controller {
     this.view = View;
 
     this.model.bindTodoListChanged(this.handelOnTodoListChange);
+    this.model.bindRouting(this.handelRouting);
 
     this.view.bindAddTodo(this.handleAddTodo);
     this.view.bindRemoveTodo(this.handleRemoveTodo);
@@ -17,13 +18,17 @@ class Controller {
     this.view.bindShowActive(this.handleShowActive);
     this.view.bindUpload(this.handleUpload);
     this.view.bindDownload(this.handleDownload);
-    this.view.goToSignIn(this.handleSignIn);
+    this.view.bindRoutingView(this.handleCreateAccount, this.handleSignIn);
 
     this.handelOnTodoListChange(this.model.listModel, this.model.showStatus);
   }
 
   handelOnTodoListChange = (listModel, showStatus) => {
     this.view.renderLists(listModel, showStatus);
+  };
+
+  handelRouting = (dispatch) => {
+    this.view.routing(dispatch);
   };
 
   handleToggleTodo = (listId, id) => {
@@ -74,8 +79,8 @@ class Controller {
     this.model.download();
   };
 
-  handleCreateAccount = (username, password) => {
-    this.model.createAccount(username, password);
+  handleCreateAccount = (username, password, repeatPass) => {
+    this.model.createAccount(username, password, repeatPass);
   };
 
   handleSignIn = (username, password) => {

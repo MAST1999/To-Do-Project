@@ -104,12 +104,20 @@ class Model {
     localStorage.setItem("listModel", JSON.stringify(this.listModel));
   }
 
-  bindTodoListChanged(callback) {
-    this.handelOnTodoListChange = callback;
+  bindTodoListChanged(handler) {
+    this.handelOnTodoListChange = handler;
   }
 
   _render(listModel, showStatus) {
     this.handelOnTodoListChange(listModel, showStatus);
+  }
+
+  bindRouting(handler) {
+    this.handelRouting = handler;
+  }
+
+  _routing(dispatch) {
+    this.handelRouting(dispatch);
   }
 
   async upload() {
@@ -136,19 +144,30 @@ class Model {
     localStorage.setItem("listModel", JSON.stringify(this.listModel));
   }
 
-  async createAccount(username, password) {
-    const res = await fetch("http://localhost:3000/users/post", {
-      method: "POST",
-      body: JSON.stringify({ username, password }),
-    });
-    if (res.status === 500) {
-      alert(`Something went wrong, status code: ${res.status}`);
-      return;
+  async createAccount(username, password, repeatPass) {
+    if (password === repeatPass) {
+      const res = await fetch("http://localhost:3000/users/post", {
+        method: "POST",
+        body: JSON.stringify({ username, password }),
+      });
+      if (res.status === 500) {
+        alert(`Something went wrong, status code: ${res.status}`);
+        return;
+      }
+
+      const message = await res.json();
+
+      this.user = username;
+      this.listModel = [];
+      this.upload();
+      this._routing("LISTS");
+      this._render(this.listModel, this.showStatus);
+      localStorage.setItem("listModel", JSON.stringify(this.listModel));
+
+      alert(message.message);
+    } else {
+      alert("The passwords don't match");
     }
-
-    const message = await res.json();
-
-    alert(message.message);
   }
 
   async signin(username, password) {
@@ -157,12 +176,15 @@ class Model {
     url.search = new URLSearchParams(params).toString();
     const res = await fetch(url);
     if (res.status === 404) {
-      alert(`User with this or password doesn't exist.`);
+      alert(`User with username or password doesn't exist.`);
       return;
     }
     const data = await res.json();
     console.log(data);
     if (data) this.listModel = data;
+    this.user = username;
+    this.download();
+    this._routing("LISTS");
     this._render(this.listModel, this.showStatus);
     localStorage.setItem("listModel", JSON.stringify(this.listModel));
   }

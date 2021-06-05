@@ -29,7 +29,7 @@ const passInput = newElement("input", "passInput");
 passInput.placeholder = "Password";
 passInput.id = "pass-input";
 passInput.name = "password";
-passInput.type = "text";
+passInput.type = "password";
 inputPassContainer.append(passInput);
 
 //* confirm the first password
@@ -54,6 +54,12 @@ form.append(
   btnSubmit
 );
 
-signUpContainer.append(mainTitle, form);
+//* link to sign in
+const link = newElement("a", "link-signin");
+link.id = "link-signin";
+link.textContent = "Already have an account? Sign in here";
+link.target = "_blank";
+
+signUpContainer.append(mainTitle, form, link);
 
 export default signUpContainer;

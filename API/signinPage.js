@@ -14,7 +14,7 @@ form.className = "signup-form";
 const inputUserContainer = document.createElement("div");
 inputUserContainer.className = "signup-container";
 const username = document.createElement("input");
-username.className = "user-input";
+username.id = "user-input";
 username.type = "text";
 username.placeholder = "Username";
 inputUserContainer.appendChild(username);

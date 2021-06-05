@@ -32,6 +32,7 @@ const signUp = (req, res) => {
         if (err) throw err;
         console.log("The user Was Saved!");
       });
+
       res.setHeader("Content-type", "application/json");
       res.setHeader("Access-Control-Allow-Origin", "*");
       res.end(

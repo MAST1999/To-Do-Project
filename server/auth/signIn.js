@@ -38,6 +38,7 @@ const signIn = (req, res) => {
           return;
         }
       }
+      res.setHeader("Access-Control-Allow-Origin", "*");
       res.statusCode = 404;
       res.end();
       return;
