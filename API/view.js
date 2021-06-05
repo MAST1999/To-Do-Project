@@ -1,4 +1,5 @@
 import signUpContainer from "./signupPage.js";
+import signInContainer from "./signinPage.js";
 
 class View {
   constructor() {
@@ -6,6 +7,7 @@ class View {
 
     this.signUpPage = signUpContainer;
 
+    this.signInPage = signInContainer;
     // header ---------------------
     this.header = this.createNewElement("div");
     this.header.id = "header";
@@ -85,6 +87,8 @@ class View {
   }
 
   renderLists(listModel, showStatus) {
+    this.wrapperAll.classList.remove("middle");
+    this.wrapperAll.append(this.header, this.mainBody);
     if (listModel.length === 0) {
       this.message = this.createNewElement("p");
       this.message.textContent = "Please add a new List";
@@ -344,11 +348,27 @@ class View {
     });
   }
 
-  goToSignIn() {
+  //TODO I need to make it easier to go between sign in and sign out
+  // goToSignOut(createAccount) {
+
+  // }
+
+  goToSignIn(signin) {
     this.btnSignOut.addEventListener("click", () => {
+      this.wrapperAll.classList.add("middle");
       this.wrapperAll.innerHTML = "";
-      console.log(this.signUpPage);
-      this.wrapperAll.append(this.signUpPage);
+      this.wrapperAll.append(this.signInPage);
+
+      document
+        .querySelector("#submit-signin")
+        .addEventListener("click", (event) => {
+          event.preventDefault();
+
+          signin(
+            document.querySelector(".user-input").value,
+            document.querySelector("#pass-input").value
+          );
+        });
     });
   }
 }

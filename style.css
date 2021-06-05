@@ -33,6 +33,7 @@ html {
 }
 /* styling buttons */
 [type="text"],
+[type="password"],
 button {
   display: inline-block;
   -webkit-appearance: none;
@@ -52,7 +53,9 @@ button {
 
 /* styling inputs */
 [type="text"]:active,
-[type="text"]:focus {
+[type="text"]:focus,
+[type="password"]:active,
+[type="password"]:focus {
   outline: 0;
   border: 2px solid #007bff;
 }
@@ -95,4 +98,39 @@ button {
   padding: 0px 3px;
   border: 2px #001aff solid;
   border-radius: 4px;
+}
+
+.title-signup {
+  font-size: 32px;
+  font-weight: 700;
+  padding: 15px;
+}
+
+.user-input,
+.pass-input {
+  margin: 15px;
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 50%;
+  margin-top: 50px;
+}
+
+.signup-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.middle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

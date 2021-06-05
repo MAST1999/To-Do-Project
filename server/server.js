@@ -79,7 +79,8 @@ const server = http.createServer((req, res) => {
       console.log("HERE");
 
       const reqURL = `http://localhost:3000${req.url}`;
-      let user = new URL(reqURL).searchParams.get("user");
+      const newURL = new URL(reqURL);
+      let user = newURL.searchParams.get("user");
 
       fs.readFile("./server/listModel.json", (err, dataFile) => {
         if (err) {
@@ -105,6 +106,10 @@ const server = http.createServer((req, res) => {
 
     case "/users/post":
       auth.signUp(req, res);
+      return;
+
+    case "/users/get":
+      auth.signIn(req, res);
       return;
 
     default:

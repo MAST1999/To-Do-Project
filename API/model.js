@@ -135,6 +135,37 @@ class Model {
     this._render(this.listModel, this.showStatus);
     localStorage.setItem("listModel", JSON.stringify(this.listModel));
   }
+
+  async createAccount(username, password) {
+    const res = await fetch("http://localhost:3000/users/post", {
+      method: "POST",
+      body: JSON.stringify({ username, password }),
+    });
+    if (res.status === 500) {
+      alert(`Something went wrong, status code: ${res.status}`);
+      return;
+    }
+
+    const message = await res.json();
+
+    alert(message.message);
+  }
+
+  async signin(username, password) {
+    const url = new URL("http://localhost:3000/users/get");
+    const params = { username, password };
+    url.search = new URLSearchParams(params).toString();
+    const res = await fetch(url);
+    if (res.status === 404) {
+      alert(`User with this or password doesn't exist.`);
+      return;
+    }
+    const data = await res.json();
+    console.log(data);
+    if (data) this.listModel = data;
+    this._render(this.listModel, this.showStatus);
+    localStorage.setItem("listModel", JSON.stringify(this.listModel));
+  }
 }
 
 export default Model;

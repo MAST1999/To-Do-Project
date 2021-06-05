@@ -17,7 +17,7 @@ class Controller {
     this.view.bindShowActive(this.handleShowActive);
     this.view.bindUpload(this.handleUpload);
     this.view.bindDownload(this.handleDownload);
-    this.view.goToSignIn();
+    this.view.goToSignIn(this.handleSignIn);
 
     this.handelOnTodoListChange(this.model.listModel, this.model.showStatus);
   }
@@ -72,6 +72,14 @@ class Controller {
 
   handleDownload = () => {
     this.model.download();
+  };
+
+  handleCreateAccount = (username, password) => {
+    this.model.createAccount(username, password);
+  };
+
+  handleSignIn = (username, password) => {
+    this.model.signin(username, password);
   };
 }
 

@@ -8,34 +8,51 @@ const newElement = (element, classes) => {
 //* the main container which we will return
 const signUpContainer = newElement("div", "signup-container");
 
-const mainTitle = newElement("div", "title");
-mainTitle.textContent = "Welcome\nCreate your new account here!";
+const mainTitle = newElement("div", "title-signup");
+mainTitle.innerHTML = "Welcome! <br /> Create your new account here!";
 
 //* the form which will send the data to the server
 const form = newElement("form", "signup-form");
 
 //* username input
 const inputUserContainer = newElement("div", "input-container");
-const userLabel = newElement("label", "user-label");
-userLabel.textContent = "Username: ";
 const userInput = newElement("input", "userInput");
+userInput.placeholder = "Username";
 userInput.id = "user-input";
 userInput.name = "username";
 userInput.type = "text";
-inputUserContainer.append(userLabel, userInput);
+inputUserContainer.append(userInput);
 
 //* password input
 const inputPassContainer = newElement("div", "input-container");
-const passLabel = newElement("label", "pass-label");
-passLabel.textContent = "Password: ";
 const passInput = newElement("input", "passInput");
+passInput.placeholder = "Password";
 passInput.id = "pass-input";
 passInput.name = "password";
 passInput.type = "text";
-inputPassContainer.append(passLabel, passInput);
+inputPassContainer.append(passInput);
+
+//* confirm the first password
+const inputPassConfirmContainer = newElement("div", "input-container");
+const PassConfirm = newElement("input", "pass-confirm");
+PassConfirm.placeholder = "Repeat the password";
+PassConfirm.id = "pass-confirm";
+PassConfirm.name = "pass-confirm";
+PassConfirm.type = "password";
+inputPassConfirmContainer.append(PassConfirm);
+
+//* submit button
+const btnSubmit = newElement("button", "btn-submit");
+btnSubmit.textContent = "Create New Account";
+btnSubmit.id = "submit";
 
 //* append to the form
-form.append(inputUserContainer, inputPassContainer);
+form.append(
+  inputUserContainer,
+  inputPassContainer,
+  inputPassConfirmContainer,
+  btnSubmit
+);
 
 signUpContainer.append(mainTitle, form);
 

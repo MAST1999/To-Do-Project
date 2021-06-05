@@ -34,7 +34,11 @@ const signUp = (req, res) => {
       });
       res.setHeader("Content-type", "application/json");
       res.setHeader("Access-Control-Allow-Origin", "*");
-      res.end(JSON.stringify(obj));
+      res.end(
+        JSON.stringify({
+          message: `User ${jsonData.username} Created Successfully!`,
+        })
+      );
       return;
     });
   });
