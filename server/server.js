@@ -37,6 +37,11 @@ const server = http.createServer((req, res) => {
       path += "API/signupPage.js";
       break;
 
+    case "/API/signinPage.js":
+      res.setHeader("Content-Type", "text/javascript");
+      path += "API/signinPage.js";
+      break;
+
     case "/API/model.js":
       res.setHeader("Content-Type", "text/javascript");
       path += "API/model.js";
@@ -151,18 +156,18 @@ const server = http.createServer((req, res) => {
 
     default:
       path += "404.html";
-      //* send the html file
-      fs.readFile(path, (err, data) => {
-        if (err) {
-          console.log(err);
-          res.end("<h1>Something Went Wrong</h2>");
-        } else {
-          console.log(path);
-          res.end(data);
-        }
-      });
-      return;
+      break;
   }
+  //* send the html file
+  fs.readFile(path, (err, data) => {
+    if (err) {
+      console.log(err);
+      res.end("<h1>Something Went Wrong</h2>");
+    } else {
+      console.log(path);
+      res.end(data);
+    }
+  });
 });
 
 server.listen(3000, "localhost", () => {
