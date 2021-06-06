@@ -1,7 +1,4 @@
 [
   { "username": "amin", "password": "AminSaffari1378", "id": 1 },
-  { "username": "aa", "password": "bb", "id": 2 },
-  { "username": "Amir Hossein", "password": "1234", "id": 3 },
-  { "username": "Reza saffari", "password": "1234", "id": 4 },
-  { "username": "reas", "password": "1234", "id": 5 }
+  { "username": "aa", "password": "bb", "id": 2 }
 ]

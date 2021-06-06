@@ -4,49 +4,22 @@
       "listId": 0,
       "title": "hello",
       "toDos": [
-        {
-          "id": 0,
-          "text": "wash my hands",
-          "done": false,
-          "parentId": 0
-        },
-        {
-          "id": 1,
-          "text": "sfdaf",
-          "done": true,
-          "parentId": 0
-        }
+        { "id": 0, "text": "wash my hands", "done": false, "parentId": 0 },
+        { "id": 1, "text": "sfdaf", "done": true, "parentId": 0 }
       ]
     },
     {
       "listId": 1,
       "title": "adf",
       "toDos": [
-        {
-          "id": 0,
-          "text": "asfdaf",
-          "done": false,
-          "parentId": 1
-        },
-        {
-          "id": 1,
-          "text": "asdfa",
-          "done": true,
-          "parentId": 1
-        }
+        { "id": 0, "text": "asfdaf", "done": false, "parentId": 1 },
+        { "id": 1, "text": "asdfa", "done": true, "parentId": 1 }
       ]
     },
     {
       "listId": 2,
       "title": "sadfa",
-      "toDos": [
-        {
-          "id": 0,
-          "text": "qwerwqre",
-          "done": false,
-          "parentId": 2
-        }
-      ]
+      "toDos": [{ "id": 0, "text": "qwerwqre", "done": false, "parentId": 2 }]
     }
   ],
   "aa": [
@@ -54,18 +27,17 @@
       "listId": 0,
       "title": "hello",
       "toDos": [
-        {
-          "id": 0,
-          "text": "wash my hands",
-          "done": false,
-          "parentId": 0
-        },
-        {
-          "id": 1,
-          "text": "sfdaf",
-          "done": true,
-          "parentId": 0
-        }
+        { "id": 0, "text": "wash my hands", "done": false, "parentId": 0 },
+        { "id": 1, "text": "sfdaf", "done": true, "parentId": 0 },
+        { "id": 2, "text": "wergwg", "done": false, "parentId": 0 }
+      ]
+    },
+    {
+      "listId": 1,
+      "title": "trwh",
+      "toDos": [
+        { "id": 0, "text": "whwrht", "done": false, "parentId": 1 },
+        { "id": 1, "text": "wthwh", "done": false, "parentId": 1 }
       ]
     }
   ]

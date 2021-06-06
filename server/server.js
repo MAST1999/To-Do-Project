@@ -3,6 +3,7 @@ const fs = require("fs");
 const auth = require("./auth");
 
 const server = http.createServer((req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
   let want = "";
   if (req.url.indexOf("?") !== -1) {
     want = req.url.slice(0, req.url.indexOf("?"));
@@ -17,90 +18,126 @@ const server = http.createServer((req, res) => {
   switch (want) {
     case "/":
       res.setHeader("Content-Type", "text/html");
-      res.setHeader("Access-Control-Allow-Origin", "*");
       path += "index.html";
       break;
 
     case "/API/app.js":
       res.setHeader("Content-Type", "text/javascript");
-      res.setHeader("Access-Control-Allow-Origin", "*");
       path += "API/app.js";
       console.log("success");
       break;
 
     case "/API/controller.js":
       res.setHeader("Content-Type", "text/javascript");
-      res.setHeader("Access-Control-Allow-Origin", "*");
       path += "API/controller.js";
       break;
 
     case "/API/signupPage.js":
       res.setHeader("Content-Type", "text/javascript");
-      res.setHeader("Access-Control-Allow-Origin", "*");
       path += "API/signupPage.js";
       break;
 
     case "/API/model.js":
       res.setHeader("Content-Type", "text/javascript");
-      res.setHeader("Access-Control-Allow-Origin", "*");
       path += "API/model.js";
       break;
 
     case "/API/view.js":
       res.setHeader("Content-Type", "text/javascript");
-      res.setHeader("Access-Control-Allow-Origin", "*");
       path += "API/view.js";
       break;
 
     case "/style.css":
       res.setHeader("Content-Type", "text/css");
-      res.setHeader("Access-Control-Allow-Origin", "*");
       path += "style.css";
       console.log("success");
       break;
 
-    case "/upload":
-      req.on("data", (chunk) => {
-        data += chunk;
-      });
+    case "/upload": {
+      const { username, password } = auth.checkUser(req);
 
-      req.on("end", () => {
-        fs.writeFile("listModel.json", data, (err) => {
-          if (err) return console.log(err);
-          console.log("file was saved!");
-        });
-        res.setHeader("Content-Type", "application/json");
-        res.setHeader("Access-Control-Allow-Origin", "*");
-        res.end(data);
-      });
-      return;
+      fs.readFile("./server/userList.json", "utf-8", (err, userFile) => {
+        if (err) throw err;
 
-    case "/download": {
-      console.log("HERE");
+        let users = JSON.parse(userFile);
 
-      const reqURL = `http://localhost:3000${req.url}`;
-      const newURL = new URL(reqURL);
-      let user = newURL.searchParams.get("user");
+        for (let user of users) {
+          if (user.username === username && user.password === password) {
+            req.on("data", (chunk) => {
+              data += chunk;
+            });
 
-      fs.readFile("./server/listModel.json", (err, dataFile) => {
-        if (err) {
-          console.log(err);
-          res.end(err);
-        } else {
-          let allLists = JSON.parse(dataFile);
-          for (let prop in allLists) {
-            if (prop === user) {
-              res.setHeader("Content-Type", "application/json");
-              res.setHeader("Access-Control-Allow-Origin", "*");
-              res.end(JSON.stringify(allLists[prop]));
-              return;
-            }
+            req.on("end", () => {
+              const newData = JSON.parse(data);
+
+              fs.readFile(
+                "./server/listModel.json",
+                "utf-8",
+                (err, listModelFile) => {
+                  if (err) throw err;
+
+                  let listModel = JSON.parse(listModelFile);
+
+                  for (let list in listModel) {
+                    if (list === username) {
+                      listModel[username] = newData;
+                      fs.writeFile(
+                        "./server/listModel.json",
+                        JSON.stringify(listModel),
+                        (err) => {
+                          if (err) throw err;
+                          console.log("Updated the list model");
+                        }
+                      );
+                      res.end(JSON.stringify({ message: "Upload Successful" }));
+                      return;
+                    }
+                  }
+                }
+              );
+            });
           }
-          res.setHeader("Access-Control-Allow-Origin", "*");
-          res.statusCode = 404;
-          res.end();
         }
       });
+      return;
+    }
+
+    case "/download": {
+      const { username, password } = auth.checkUser(req);
+
+      if (!username) {
+        res.statusCode = 404;
+        res.end();
+        return;
+      }
+      fs.readFile("./server/userList.json", "utf-8", (err, fileData) => {
+        if (err) throw err;
+
+        let users = JSON.parse(fileData);
+
+        for (let user of users) {
+          if (user.username === username && user.password === password) {
+            fs.readFile("./server/listModel.json", (err, dataFile) => {
+              if (err) {
+                console.log(err);
+                res.end(err);
+              } else {
+                let allLists = JSON.parse(dataFile);
+                for (let prop in allLists) {
+                  if (prop === username) {
+                    res.setHeader("Content-Type", "application/json");
+                    res.end(JSON.stringify(allLists[prop]));
+                    return;
+                  }
+                }
+                res.statusCode = 404;
+                res.end();
+              }
+            });
+          }
+        }
+      });
+
       return;
     }
 

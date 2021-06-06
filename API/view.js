@@ -8,6 +8,9 @@ class View {
     this.signUpPage = signUpContainer;
 
     this.signInPage = signInContainer;
+
+    this.helloUser = this.createNewElement("h2", "hello-user");
+
     // header ---------------------
     this.header = this.createNewElement("div");
     this.header.id = "header";
@@ -58,12 +61,16 @@ class View {
     );
 
     // append to header
-    this.header.append(this.addTitleContainer, this.customBtnContainer);
+    this.header.append(
+      this.helloUser,
+      this.addTitleContainer,
+      this.customBtnContainer
+    );
 
     this.mainBody = this.createNewElement("div");
     this.mainBody.id = "mainBody";
 
-    this.wrapperAll.append(this.header, this.mainBody);
+    this.wrapperAll.append(this.signInPage);
   }
 
   createNewElement(tag, className) {
@@ -86,7 +93,15 @@ class View {
     this.newInput.value = "";
   }
 
-  renderLists(listModel, showStatus) {
+  renderLists(listModel, showStatus, user) {
+    if (user === "guest") {
+      this.btnDownload.classList.add("hidden");
+      this.btnUpload.classList.add("hidden");
+    } else {
+      this.btnDownload.classList.remove("hidden");
+      this.btnUpload.classList.remove("hidden");
+    }
+    this.helloUser.textContent = `${user}'s To Dos`;
     this.wrapperAll.classList.remove("middle");
     this.wrapperAll.innerHTML = "";
     this.wrapperAll.append(this.header, this.mainBody);
@@ -366,7 +381,7 @@ class View {
   }
 
   //* this is all the event for the routing process
-  bindRoutingView(createAccount, signin) {
+  bindRoutingView(createAccount, signin, singOut) {
     //* this is for submit button in sign in page
     this.wrapperAll.addEventListener("click", (event) => {
       event.preventDefault();
@@ -420,7 +435,19 @@ class View {
 
       const target = event.target;
       if (target.id === "sign-out") {
+        singOut();
         this.routing("SIGNIN");
+      }
+    });
+
+    //* this is for the guest button
+    this.wrapperAll.addEventListener("click", (event) => {
+      event.preventDefault();
+
+      const target = event.target;
+      if (target.id === "btn-guest") {
+        this.routing("LISTS");
+        singOut();
       }
     });
   }

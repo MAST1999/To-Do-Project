@@ -19,7 +19,7 @@ const signUp = (req, res) => {
       for (let user in obj) {
         if (obj[user].username === jsonData.username) {
           res.setHeader("Content-Type", "text/html");
-          res.setHeader("Access-Control-Allow-Origin", "*");
+          res.statusCode = 400;
           res.end("<p>User Already Exists</p>");
           return;
         }
@@ -34,7 +34,6 @@ const signUp = (req, res) => {
       });
 
       res.setHeader("Content-type", "application/json");
-      res.setHeader("Access-Control-Allow-Origin", "*");
       res.end(
         JSON.stringify({
           message: `User ${jsonData.username} Created Successfully!`,

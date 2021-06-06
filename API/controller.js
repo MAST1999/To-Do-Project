@@ -18,13 +18,15 @@ class Controller {
     this.view.bindShowActive(this.handleShowActive);
     this.view.bindUpload(this.handleUpload);
     this.view.bindDownload(this.handleDownload);
-    this.view.bindRoutingView(this.handleCreateAccount, this.handleSignIn);
-
-    this.handelOnTodoListChange(this.model.listModel, this.model.showStatus);
+    this.view.bindRoutingView(
+      this.handleCreateAccount,
+      this.handleSignIn,
+      this.handleSingOut
+    );
   }
 
-  handelOnTodoListChange = (listModel, showStatus) => {
-    this.view.renderLists(listModel, showStatus);
+  handelOnTodoListChange = (listModel, showStatus, user) => {
+    this.view.renderLists(listModel, showStatus, user);
   };
 
   handelRouting = (dispatch) => {
@@ -85,6 +87,10 @@ class Controller {
 
   handleSignIn = (username, password) => {
     this.model.signin(username, password);
+  };
+
+  handleSingOut = () => {
+    this.model.signOut();
   };
 }
 

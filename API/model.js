@@ -3,33 +3,28 @@ class Model {
     if (JSON.parse(localStorage.getItem("listModel"))) {
       this.listModel = JSON.parse(localStorage.getItem("listModel"));
     } else {
-      this.listModel = [
-        {
-          listId: 0,
-          title: "hello",
-          toDos: [{ id: 0, text: "wash my hands", done: false, parentId: 0 }],
-        },
-      ];
+      this.listModel = [];
     }
 
-    this.user = "reza";
+    this.user = "guest";
+    this.pass = "";
 
     this.showStatus = "all";
   }
 
   showAll() {
     this.showStatus = "all";
-    this._render(this.listModel, this.showStatus);
+    this._render(this.listModel, this.showStatus, this.user);
     localStorage.setItem("listModel", JSON.stringify(this.listModel));
   }
   showDone() {
     this.showStatus = "done";
-    this._render(this.listModel, this.showStatus);
+    this._render(this.listModel, this.showStatus, this.user);
     localStorage.setItem("listModel", JSON.stringify(this.listModel));
   }
   showActive() {
     this.showStatus = "active";
-    this._render(this.listModel, this.showStatus);
+    this._render(this.listModel, this.showStatus, this.user);
     localStorage.setItem("listModel", JSON.stringify(this.listModel));
   }
 
@@ -43,20 +38,20 @@ class Model {
 
   addList(title) {
     this.listModel.push({ listId: this.listModel.length, title, toDos: [] });
-    this._render(this.listModel, this.showStatus);
+    this._render(this.listModel, this.showStatus, this.user);
     localStorage.setItem("listModel", JSON.stringify(this.listModel));
   }
 
   editTitle(listId, title) {
     const list = this.findList(listId);
     list.title = title;
-    this._render(this.listModel, this.showStatus);
+    this._render(this.listModel, this.showStatus, this.user);
     localStorage.setItem("listModel", JSON.stringify(this.listModel));
   }
 
   removeList(listId) {
     this.listModel = this.listModel.filter((mList) => mList.listId !== listId);
-    this._render(this.listModel, this.showStatus);
+    this._render(this.listModel, this.showStatus, this.user);
     localStorage.setItem("listModel", JSON.stringify(this.listModel));
   }
 
@@ -75,14 +70,14 @@ class Model {
       done: false,
       parentId: list.listId,
     });
-    this._render(this.listModel, this.showStatus);
+    this._render(this.listModel, this.showStatus, this.user);
     localStorage.setItem("listModel", JSON.stringify(this.listModel));
   }
 
   removeTodo(listId, id) {
     const list = this.findList(listId);
     list.toDos = list.toDos.filter((todo) => todo.id !== id);
-    this._render(this.listModel, this.showStatus);
+    this._render(this.listModel, this.showStatus, this.user);
     localStorage.setItem("listModel", JSON.stringify(this.listModel));
   }
 
@@ -91,7 +86,7 @@ class Model {
     const todo = this.findTodo(list, id);
 
     todo.text = text;
-    this._render(this.listModel, this.showStatus);
+    this._render(this.listModel, this.showStatus, this.user);
     localStorage.setItem("listModel", JSON.stringify(this.listModel));
   }
 
@@ -100,7 +95,7 @@ class Model {
     const todo = this.findTodo(list, id);
 
     todo.done = !todo.done;
-    this._render(this.listModel, this.showStatus);
+    this._render(this.listModel, this.showStatus, this.user);
     localStorage.setItem("listModel", JSON.stringify(this.listModel));
   }
 
@@ -108,8 +103,8 @@ class Model {
     this.handelOnTodoListChange = handler;
   }
 
-  _render(listModel, showStatus) {
-    this.handelOnTodoListChange(listModel, showStatus);
+  _render(listModel, showStatus, user) {
+    this.handelOnTodoListChange(listModel, showStatus, user);
   }
 
   bindRouting(handler) {
@@ -121,7 +116,10 @@ class Model {
   }
 
   async upload() {
-    const res = await fetch("http://localhost:3000/upload", {
+    const url = new URL("http://localhost:3000/upload");
+    const params = { username: this.user, password: this.pass };
+    url.search = new URLSearchParams(params).toString();
+    const res = await fetch(url, {
       method: "POST",
       body: JSON.stringify(this.listModel),
     });
@@ -130,8 +128,8 @@ class Model {
   }
 
   async download() {
-    let url = new URL("http://localhost:3000/download");
-    let params = { user: this.user };
+    const url = new URL("http://localhost:3000/users/get");
+    const params = { username: this.user, password: this.pass };
     url.search = new URLSearchParams(params).toString();
     const res = await fetch(url);
     if (res.status === 404) {
@@ -140,11 +138,15 @@ class Model {
     }
     const data = await res.json();
     if (data) this.listModel = data;
-    this._render(this.listModel, this.showStatus);
+    this._render(this.listModel, this.showStatus, this.user);
     localStorage.setItem("listModel", JSON.stringify(this.listModel));
   }
 
   async createAccount(username, password, repeatPass) {
+    if (username === "guest") {
+      alert("guest is already a user");
+      return;
+    }
     if (password === repeatPass) {
       const res = await fetch("http://localhost:3000/users/post", {
         method: "POST",
@@ -152,6 +154,9 @@ class Model {
       });
       if (res.status === 500) {
         alert(`Something went wrong, status code: ${res.status}`);
+        return;
+      } else if (res.status === 400) {
+        alert("User Already Exists");
         return;
       }
 
@@ -161,7 +166,7 @@ class Model {
       this.listModel = [];
       this.upload();
       this._routing("LISTS");
-      this._render(this.listModel, this.showStatus);
+      this._render(this.listModel, this.showStatus, this.user);
       localStorage.setItem("listModel", JSON.stringify(this.listModel));
 
       alert(message.message);
@@ -183,10 +188,19 @@ class Model {
     console.log(data);
     if (data) this.listModel = data;
     this.user = username;
+    this.pass = password;
     this.download();
     this._routing("LISTS");
-    this._render(this.listModel, this.showStatus);
+    this._render(this.listModel, this.showStatus, this.user);
     localStorage.setItem("listModel", JSON.stringify(this.listModel));
+  }
+
+  signOut() {
+    this.user = "guest";
+    this.pass = "";
+    this.listModel = [];
+    localStorage.setItem("listModel", "[]");
+    this._render(this.listModel, "all", this.user);
   }
 }
 

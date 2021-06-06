@@ -33,6 +33,11 @@ const btnSubmit = document.createElement("button");
 btnSubmit.textContent = "Sign In";
 btnSubmit.id = "submit-signin";
 
+//* guest button
+const btnGuest = document.createElement("button");
+btnGuest.textContent = "Sign in as guest";
+btnGuest.id = "btn-guest";
+
 //* link to create account
 const link = document.createElement("a");
 link.id = "go-to-signup";
@@ -40,7 +45,7 @@ link.textContent = "You don't have an account? make one here!";
 link.target = "_blank";
 
 //* append to form
-form.append(inputUserContainer, inputPassContainer, btnSubmit);
+form.append(inputUserContainer, inputPassContainer, btnSubmit, btnGuest);
 
 //* append to the signin page
 signInContainer.append(signinTitle, form, link);
