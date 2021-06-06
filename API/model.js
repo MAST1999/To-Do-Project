@@ -119,12 +119,11 @@ class Model {
     const url = new URL("http://localhost:3000/upload");
     const params = { username: this.user, password: this.pass };
     url.search = new URLSearchParams(params).toString();
+    // eslint-disable-next-line no-unused-vars
     const res = await fetch(url, {
       method: "POST",
       body: JSON.stringify(this.listModel),
     });
-    const result = await res.json();
-    console.log(result);
   }
 
   async download() {
@@ -163,6 +162,7 @@ class Model {
       const message = await res.json();
 
       this.user = username;
+      this.pass = password;
       this.listModel = [];
       this.upload();
       this._routing("LISTS");
@@ -185,7 +185,6 @@ class Model {
       return;
     }
     const data = await res.json();
-    console.log(data);
     if (data) this.listModel = data;
     this.user = username;
     this.pass = password;

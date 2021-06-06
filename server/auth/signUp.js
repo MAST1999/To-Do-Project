@@ -33,6 +33,24 @@ const signUp = (req, res) => {
         console.log("The user Was Saved!");
       });
 
+      fs.readFile("./server/listModel.json", "utf-8", (err, listModelFile) => {
+        if (err) throw err;
+
+        const listModel = JSON.parse(listModelFile);
+
+        listModel[jsonData.username] = [];
+
+        fs.writeFile(
+          "./server/listModel.json",
+          JSON.stringify(listModel),
+          (err) => {
+            if (err) throw err;
+
+            console.log("Added the user to the list model.");
+          }
+        );
+      });
+
       res.setHeader("Content-type", "application/json");
       res.end(
         JSON.stringify({
