@@ -1,54 +1,30 @@
-/* resetting the general things and setting box-sizing */
 * {
-  margin: 0px;
   padding: 0px;
+  margin: 0px;
+
   box-sizing: border-box;
 }
-/* this is for when the task is complete */
-.completed {
-  text-decoration: line-through red 2px;
-}
-body,
+
 html {
-  height: 100%;
-}
-/* the main flex box containing the whole app */
-#wrapperAll {
-  display: flex;
-  height: 100%;
-  flex-direction: column;
-  gap: 20px;
-}
-#header {
-  margin-top: 10px;
-  align-self: center;
-}
-/* fixing the margin from the screen / setting the mainBody as a flex box */
-#mainBody {
-  margin-left: 10px;
-  gap: 10px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-/* styling buttons */
-[type="text"],
-[type="password"],
-button {
-  display: inline-block;
-  -webkit-appearance: none;
-  padding: 0.3rem 0.7rem;
-  font-size: 1rem;
-  border: 2px solid #ccc;
-  border-radius: 4px;
+  height: 100vh;
 }
 
-button {
-  cursor: pointer;
-  background: #007bff;
-  color: white;
-  border: 2px solid #007bff;
-  margin: 4px 0.5rem;
+body {
+  height: 100%;
+}
+
+#wrapper {
+  width: 100%;
+  height: 100%;
+
+  padding: 5px 10px;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* styling inputs */
@@ -60,81 +36,64 @@ button {
   border: 2px solid #007bff;
 }
 
-.title {
-  font-size: 24px;
+/* styling buttons */
+[type="text"],
+[type="password"],
+button {
+  display: inline-block;
+  -webkit-appearance: none;
+  padding: 0.1rem 0.4rem;
+  font-size: 1rem;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  cursor: pointer;
+  background: #007bff;
+  color: white;
+  border: 2px solid #007bff;
+  margin: 2px 0.2rem;
+}
+
+#list-input {
+  width: 200px;
+}
+
+h1 {
+  padding: 0px 5px 0px 0px;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+
+.all-list-container {
+  margin-top: 5px;
+  height: 100%;
 }
 
 .done {
   text-decoration: line-through;
 }
-.doneCheckbox {
-  margin: 5px 8px;
+
+.list-container {
+  height: 100%;
 }
-.todo {
-  margin: 5px 8px;
-  margin-left: 0px;
-}
-.todoPart,
-.titleContainer,
-#header {
+
+.all-list-container {
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
-
-  align-items: baseline;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
-#btnAddList {
-  background-color: #004794;
-}
-
-.titleContainer {
-  padding: 3px;
-  border: rgb(147, 163, 253) solid 2px;
-  border-radius: 4px;
-}
-.todoPart {
-  margin: 3px 0px;
-  padding: 0px 3px;
-  border: 2px #001aff solid;
-  border-radius: 4px;
-}
-
-.title-signup {
-  font-size: 32px;
-  font-weight: 700;
-  padding: 15px;
-}
-
-.user-input,
-.pass-input {
-  margin: 15px;
-}
-
-.signup-form {
+.title-container {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.todo-container {
+  display: flex;
+  flex-direction: row;
   align-items: center;
   gap: 10px;
-  width: 50%;
-  margin-top: 50px;
-}
-
-.signup-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.middle {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.hidden {
-  display: none;
 }

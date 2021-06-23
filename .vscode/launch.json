@@ -5,21 +5,38 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "vscode-edge-devtools.debug",
+      "request": "launch",
+      "name": "Launch Microsoft Edge and open the Edge DevTools",
+      "url": "http://localhost:3000",
+      "sourceMaps": true,
+      "webRoot": "${workspaceFolder}"
+    },
+    {
       "type": "firefox",
       "request": "launch",
       "reAttach": true,
-      "name": "Launch localhost",
-      "url": "http://localhost:3000/",
+      "name": "Launch index.html",
       "file": "${workspaceFolder}/index.html",
-      "webRoot": "${workspaceFolder}",
-      "port": 5000
+      "reloadOnChange": {
+        "watch": [
+          "${workspaceFolder}/**/*.js",
+          "${workspaceFolder}/**/*.html",
+          "${workspaceFolder}/**/*.css"
+        ],
+        "ignore": "**/node_modules/**"
+      },
+      "preLaunchTask": "tsc: build - tsconfig.json"
     },
+
     {
-      "name": "Launch Server",
-      "program": "${workspaceFolder}/server/server.js",
+      "type": "pwa-node",
       "request": "launch",
+      "name": "Launch Program",
       "skipFiles": ["<node_internals>/**"],
-      "type": "pwa-node"
+      "program": "${workspaceFolder}\\src\\server\\bin\\www.ts",
+      "preLaunchTask": "tsc: build - tsconfig.json",
+      "outFiles": ["${workspaceFolder}/public/**/*.js"]
     }
   ]
 }
