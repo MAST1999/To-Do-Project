@@ -1,11 +1,12 @@
 {
-    "cSpell.words": [
-        "afterbegin",
-        "cficb",
-        "cftwdb",
-        "sginin",
-        "signin",
-        "signup"
-    ],
-    "liveServer.settings.port": 5501
+  "cSpell.words": [
+    "afterbegin",
+    "cficb",
+    "cftwdb",
+    "sginin",
+    "signin",
+    "signup"
+  ],
+  "liveServer.settings.port": 5501,
+  "editor.tabSize": 2
 }

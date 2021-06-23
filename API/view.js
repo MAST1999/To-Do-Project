@@ -1,5 +1,5 @@
-import signUpContainer from "./signupPage.js";
 import signInContainer from "./signinPage.js";
+import signUpContainer from "./signupPage.js";
 
 class View {
   constructor() {
